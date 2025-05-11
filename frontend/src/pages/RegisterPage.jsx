@@ -1,0 +1,273 @@
+// pages/register.jsx
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Select,
+  Heading,
+  VStack,
+  useColorModeValue,
+  Text,
+  useToast, // Import useToast
+  useColorMode, // Import useColorMode
+  Link, // Import Link dari Chakra UI
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { Form, useNavigate } from "react-router-dom"; // Import useNavigate
+import axios from "axios"; // Import axios untuk mengirim request HTTP
+
+const Register = () => {
+  const { colorMode } = useColorMode(); // Mendapatkan mode warna saat ini
+
+  // Sesuaikan gradient dan shadow agar sama dengan login
+  const borderGradient = useColorModeValue(
+    "linear(to-r, teal.400, blue.600)", // Mode terang: warna lebih cerah
+    "linear(to-r, teal.300, cyan.500)" // Mode gelap: warna lebih menonjol
+  );
+  const hoverShadow = useColorModeValue(
+    "0 0 20px rgba(4, 73, 73, 0.8)", // Mode terang: shadow lebih jelas
+    "0 0 25px rgba(0, 255, 255, 0.8)" // Mode gelap: shadow lebih intens
+  );
+
+  const [form, setForm] = useState({
+    name: "",
+    usn: "",
+    gmail: "",
+    password: "",
+    institusi: "",
+    role: "",
+    nim: "",
+    nidn: "",
+  });
+
+  const toast = useToast(); // Inisialisasi toast
+  const navigate = useNavigate(); // Inisialisasi navigate
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Mengirimkan permintaan register ke backend (sesuaikan endpoint Anda)
+      const response = await axios.post("http://localhost:5000/api/data/register", form);
+      
+      toast({
+        title: "Registrasi Berhasil!",
+        description: response.data.message || "Akun Anda telah berhasil dibuat.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+
+      
+      // Redirect ke halaman login setelah registrasi berhasil
+      navigate("/login");
+    } catch (error) {
+      toast({
+        title: "Registrasi Gagal",
+        description: error.response?.data?.message || "Terjadi kesalahan",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+
+    }
+  };
+
+  return (
+    <Box
+      minH="100vh"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      bg={useColorModeValue("gray.50", "gray.900")} // Background yang lebih halus
+      p={{ base: 4, md: 6 }} // Padding responsif
+    >
+      <Box
+        maxW={{ base: "xs", md: "sm", lg: "md" }} // Ukuran kotak responsif, sama dengan login
+        mx="auto"
+        p={{ base: 6, md: 7 }} // Padding disesuaikan
+        borderRadius="lg" // Radius sudut
+        borderWidth="2px"
+        borderColor="transparent"
+        bgGradient={borderGradient}
+        boxShadow={hoverShadow}
+        transition="all 0.3s ease-in-out" // Efek transisi untuk hover
+        _hover={{
+          transform: "translateY(-5px)", // Efek sedikit terangkat saat hover
+          boxShadow: hoverShadow,
+        }}
+      >
+        <VStack
+          spacing={5} // Spacing dikurangi
+          as="form"
+          onSubmit={handleSubmit}
+          bg={useColorModeValue("white", "gray.700")} // Background Vstack disesuaikan mode warna
+          p={{ base: 5, md: 7 }} // Padding responsif
+          borderRadius="md" // Radius sudut
+          boxShadow="lg" // Bayangan pada form itu sendiri
+        >
+          <Heading
+            size="lg" // Ukuran heading
+            mb={3} // Margin bawah
+            color={useColorModeValue("teal.600", "teal.300")} // Warna heading
+          >
+            Daftar Akun Baru
+          </Heading>
+          <Text
+            fontSize="sm" // Ukuran teks
+            mb={3} // Margin bawah
+            color={useColorModeValue("gray.600", "gray.300")}
+            textAlign="center"
+          >
+            Silakan isi detail di bawah untuk membuat akun Anda.
+          </Text>
+            {/* Input Nama (Field Baru) */}
+          <FormControl id="name" isRequired>
+            <FormLabel color={useColorModeValue("gray.700", "gray.200")}>Nama Lengkap</FormLabel>
+            <Input
+              name="name" // <-- Nama field: name
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Nama Lengkap Anda"
+              size="md"
+              focusBorderColor={useColorModeValue("teal.500", "cyan.400")}
+              _placeholder={{ color: useColorModeValue("gray.400", "gray.500") }}
+            />
+          </FormControl>
+          <FormControl id="usn" isRequired>
+            <FormLabel color={useColorModeValue("gray.700", "gray.200")}>Username</FormLabel>
+            <Input  
+              name="usn"
+              value={form.usn}
+              onChange={handleChange}
+              placeholder="Nama Pengguna Anda"
+              size="md" // Ukuran input
+              focusBorderColor={useColorModeValue("teal.500", "cyan.400")} // Warna border saat fokus
+              _placeholder={{ color: useColorModeValue("gray.400", "gray.500") }} // Warna placeholder
+            />
+          </FormControl>
+
+          <FormControl id="gmail" isRequired>
+            <FormLabel color={useColorModeValue("gray.700", "gray.200")}>Email</FormLabel>
+            <Input
+              name="gmail"
+              type="email"
+              value={form.gmail}
+              onChange={handleChange}
+              placeholder="alamat_email@contoh.com"
+              size="md"
+              focusBorderColor={useColorModeValue("teal.500", "cyan.400")}
+              _placeholder={{ color: useColorModeValue("gray.400", "gray.500") }}
+            />
+          </FormControl>
+
+          <FormControl id="password" isRequired>
+            <FormLabel color={useColorModeValue("gray.700", "gray.200")}>Password</FormLabel>
+            <Input
+              name="password"
+              type="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Buat password"
+              size="md"
+              focusBorderColor={useColorModeValue("teal.500", "cyan.400")}
+              _placeholder={{ color: useColorModeValue("gray.400", "gray.500") }}
+            />
+          </FormControl>
+
+            <FormControl id="institusi" isRequired>
+            <FormLabel color={useColorModeValue("gray.700", "gray.200")}>Institusi</FormLabel>
+            <Input
+              name="institusi"
+              type="institusi"
+              value={form.institusi}
+              onChange={handleChange}
+              placeholder="Nama Institusi Anda"
+              size="md"
+              focusBorderColor={useColorModeValue("teal.500", "cyan.400")}
+              _placeholder={{ color: useColorModeValue("gray.400", "gray.500") }}
+            />
+          </FormControl>
+
+
+          <FormControl id="role" isRequired>
+            <FormLabel color={useColorModeValue("gray.700", "gray.200")}>Role</FormLabel>
+            <Select
+              name="role"
+              placeholder="Pilih role"
+              value={form.role}
+              onChange={handleChange}
+              size="md" // Ukuran select
+              focusBorderColor={useColorModeValue("teal.500", "cyan.400")}
+            >
+              <option value="Mahasiswa">Mahasiswa</option>
+              <option value="Dosen">Dosen</option>
+            </Select>
+          </FormControl>
+
+          {form.role === "Mahasiswa" && (
+            <FormControl id="nim" isRequired>
+              <FormLabel color={useColorModeValue("gray.700", "gray.200")}>NIM</FormLabel>
+              <Input
+                name="nim"
+                value={form.nim}
+                onChange={handleChange}
+                placeholder="Nomor Induk Mahasiswa"
+                size="md"
+                focusBorderColor={useColorModeValue("teal.500", "cyan.400")}
+                _placeholder={{ color: useColorModeValue("gray.400", "gray.500") }}
+              />
+            </FormControl>
+          )}
+
+          {form.role === "Dosen" && (
+            <FormControl id="nidn" isRequired>
+              <FormLabel color={useColorModeValue("gray.700", "gray.200")}>NIDN</FormLabel>
+              <Input
+                name="nidn"
+                value={form.nidn}
+                onChange={handleChange}
+                placeholder="Nomor Induk Dosen Nasional"
+                size="md"
+                focusBorderColor={useColorModeValue("teal.500", "cyan.400")}
+                _placeholder={{ color: useColorModeValue("gray.400", "gray.500") }}
+              />
+            </FormControl>
+          )}
+
+          <Button
+            type="submit"
+            colorScheme="teal"
+            width="full"
+            size="md" // Ukuran tombol
+            mt={3} // Margin atas
+            _hover={{
+              bg: useColorModeValue("teal.600", "teal.400"),
+              transform: "scale(1.02)",
+            }}
+            transition="all 0.2s ease-in-out"
+          >
+            Daftar
+          </Button>
+
+          <Text fontSize="xs" color={useColorModeValue("gray.600", "gray.400")}>
+            Sudah punya akun?{" "}
+            <Link
+              href="/login"
+              color="teal.500"
+              fontWeight="semibold"
+              _hover={{ textDecoration: "underline" }}
+            >
+              Login di sini
+            </Link>
+          </Text>
+        </VStack>
+      </Box>
+    </Box>
+  );
+};
+
+export default Register;
