@@ -1,10 +1,26 @@
 import React from 'react'
-import { Box, Text, VStack, Icon, Input, useColorModeValue, Center, Button, Image } from '@chakra-ui/react';
-import { FaCamera } from 'react-icons/fa'; // Untuk ikon kamera
-import { useState } from 'react'; // Untuk mengelola state gambar
+import {
+  Box,
+  Text,
+  VStack,
+  Icon,
+  Input,
+  useColorModeValue,
+  Center,
+  Button,
+  Image,
+  useDisclosure, // Import useDisclosure
+  AlertDialog, // Import AlertDialog
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter
+} from '@chakra-ui/react';
+import { FaCamera } from 'react-icons/fa';
+import { useState, useRef } from 'react'; // Import useRef
 
 const ScanPage = () => {
-  // Menggunakan pola warna dari halaman login Anda
   const borderGradient = useColorModeValue(
     "linear(to-r, teal.400, blue.600)",
     "linear(to-r, teal.300, cyan.500)"
@@ -16,25 +32,30 @@ const ScanPage = () => {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
+  // State and ref for the pop-up
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef(); // To focus on the close button for accessibility
+
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setSelectedImage(URL.createObjectURL(event.target.files[0]));
     }
   };
 
+  const handleScanNowClick = () => {
+    onOpen(); // Open the pop-up when Scan Now is clicked
+  };
+
   return (
-    // Menghilangkan properti bgGradient dari Center karena background sudah diatur di route awal
     <Center minH="100vh" p={4}>
       <Box
-        // Menggunakan latar belakang putih transparan di mode terang dan abu-abu gelap di mode gelap
         bg={useColorModeValue("whiteAlpha.900", "gray.700")}
         p={8}
         borderRadius="lg"
-        // Menggunakan borderGradient untuk border pada box utama (seperti halaman login)
         borderWidth="2px"
         borderColor="transparent"
-        bgGradient={borderGradient} // Gradien ini akan menjadi border transparan
-        boxShadow={hoverShadow} // Menggunakan shadow yang sama
+        bgGradient={borderGradient}
+        boxShadow={hoverShadow}
         transition="all 0.3s ease-in-out"
         _hover={{
           transform: "translateY(-5px)",
@@ -44,20 +65,17 @@ const ScanPage = () => {
         maxW="md"
         w="full"
       >
-        {/* Konten di dalam Box, pastikan tidak terlalu rapat dengan border */}
         <VStack
           spacing={6}
-          bg={useColorModeValue("white", "gray.800")} // Latar belakang untuk VStack di dalam Box
+          bg={useColorModeValue("white", "gray.800")}
           p={{ base: 5, md: 7 }}
           borderRadius="md"
           boxShadow="lg"
         >
-          {/* Bagian "Under Construction" */}
           <Text fontSize={{ base: "3xl", md: "4xl" }} fontWeight="extrabold" color={useColorModeValue("teal.600", "teal.300")}>
             Under Construction !!
           </Text>
 
-          {/* Bagian pertanyaan dan ajakan */}
           <Text fontSize={{ base: "lg", md: "xl" }} color={useColorModeValue("gray.700", "gray.300")} mt={4}>
             Find unidentifiable species?
           </Text>
@@ -65,10 +83,8 @@ const ScanPage = () => {
             Let's scan them!
           </Text>
 
-          {/* Ikon Kamera */}
           <Icon as={FaCamera} w={12} h={12} color={useColorModeValue("teal.600", "cyan.400")} />
 
-          {/* Tempat untuk input gambar */}
           <Box
             border="2px dashed"
             borderColor={useColorModeValue("gray.400", "gray.500")}
@@ -84,7 +100,7 @@ const ScanPage = () => {
             onClick={() => document.getElementById('image-upload').click()}
             _hover={{ borderColor: useColorModeValue("teal.500", "cyan.400") }}
             position="relative"
-            bg={useColorModeValue("gray.50", "gray.700")} // Latar belakang area input gambar
+            bg={useColorModeValue("gray.50", "gray.700")}
           >
             {selectedImage ? (
               <Image src={selectedImage} alt="Selected" maxH="180px" objectFit="contain" />
@@ -110,23 +126,49 @@ const ScanPage = () => {
             />
           </Box>
 
-          {/* Tombol Scan (opsional, bisa ditambahkan fungsionalitas nanti) */}
           <Button
-            colorScheme="teal" // Menggunakan colorScheme teal
+            colorScheme="teal"
             size="lg"
             mt={4}
             isDisabled={!selectedImage}
-            bg={useColorModeValue("teal.500", "cyan.500")} // Warna solid untuk tombol
+            bg={useColorModeValue("teal.500", "cyan.500")}
             _hover={{
               bg: useColorModeValue("teal.600", "cyan.600"),
               transform: "scale(1.02)",
             }}
             transition="all 0.2s ease-in-out"
+            onClick={handleScanNowClick} // Call the handler to open the pop-up
           >
             Scan Now
           </Button>
         </VStack>
       </Box>
+
+      {/* AlertDialog for the pop-up */}
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isCentered
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Feature Unavailable
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Sorry, this feature is currently unavailable.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Close
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </Center>
   );
 };
