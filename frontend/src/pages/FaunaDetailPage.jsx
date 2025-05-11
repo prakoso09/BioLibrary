@@ -335,14 +335,14 @@ const FaunaDetailPage = () => {
                                         <Text fontWeight="semibold" fontSize="md" color={subheadingColor}>
                                             Subspesies:
                                         </Text>
-                                        <VStack align="start" mt={1} spacing={1}>
+                                        <UnorderedList align="start" mt={1} spacing={1}> {/* Changed VStack to UnorderedList */}
                                             {singleFauna.klasifikasiIlmiah.subspesies.map((sub, idx) => (
-                                                <Text key={idx} fontSize="md" color={textColor}>
+                                                <ListItem key={idx} fontSize="md" color={textColor}> {/* Changed Text to ListItem */}
                                                     <ListIcon as={CheckCircleIcon} color="green.500" />
                                                     {sub.nama} ({sub.deskripsi})
-                                                </Text>
+                                                </ListItem>
                                             ))}
-                                        </VStack>
+                                        </UnorderedList>
                                     </Box>
                                 )}
                                 <Divider borderColor={borderColor} opacity={0.5} />
