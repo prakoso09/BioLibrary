@@ -1,7 +1,6 @@
-// store/flora.js
 import { create } from "zustand";
 import axios from "axios";
-// No need to import getToken() or setAuthToken() here anymore
+
 
 export const useFloraStore = create((set) => ({
     flora: [],
@@ -15,8 +14,7 @@ export const useFloraStore = create((set) => ({
     createFlora: async (floraData) => {
         set({ loading: true, error: null });
         try {
-            // AXIOS WILL AUTOMATICALLY ATTACH THE AUTHORIZATION HEADER
-            // if a token is set via setAuthToken(token) or loaded via loadAuthToken()
+            // AXIOS akan secara otomatis menaruh header jika token di set via setAuthToken(token) atau loadAuthToken()
             const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/data/flora`, floraData);
 
             if (!response.data.success) {
@@ -42,7 +40,7 @@ export const useFloraStore = create((set) => ({
     deleteFlora: async (id) => {
         set({ loading: true, error: null });
         try {
-            // AXIOS WILL AUTOMATICALLY ATTACH THE AUTHORIZATION HEADER
+            // AXIOS akan secara otomatis menaruh header jika token di set via setAuthToken(token) atau loadAuthToken()
             const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/data/flora/${id}`);
             if (!response.data.success) {
                 set({ loading: false });
@@ -66,7 +64,7 @@ export const useFloraStore = create((set) => ({
     updateFlora: async (id, updatedFlora) => {
         set({ loading: true, error: null });
         try {
-            // AXIOS WILL AUTOMATICALLY ATTACH THE AUTHORIZATION HEADER
+            // AXIOS akan secara otomatis menaruh header jika token di set via setAuthToken(token) atau loadAuthToken()
             const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/data/flora/${id}`, updatedFlora);
             if (!response.data.success) {
                 set({ loading: false });
@@ -92,7 +90,6 @@ export const useFloraStore = create((set) => ({
         }
     },
 
-    // fetchFlora and fetchFloraById typically do NOT require a token if they are public read operations.
     fetchFlora: async () => {
         set({ loading: true, error: null });
         try {

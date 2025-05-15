@@ -1,4 +1,3 @@
-// components/modals/NationalParkFormModal.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import {
     Modal,
@@ -20,12 +19,12 @@ import {
     useToast,
     Spinner,
     HStack,
-    NumberInput, // Untuk input angka
+    NumberInput, 
     NumberInputField,
     NumberInputStepper,
     NumberIncrementStepper,
     NumberDecrementStepper,
-    Select // Untuk dropdown
+    Select 
 } from '@chakra-ui/react';
 import axios from 'axios';
 
@@ -33,7 +32,7 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
     const [formData, setFormData] = useState({
         namaResmi: '',
         lokasi: '',
-        wilayahAdministratif: '', // Akan di-parse dari string
+        wilayahAdministratif: '', 
         image: null,
         koordinatGeografis: { lintang: '', bujur: '' },
         luas: { value: '', unit: 'Hektar', referensi: '' },
@@ -46,24 +45,24 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
             suhuRataRata: { kakiGunung: '', puncak: '' },
             kelembabanUdaraRataRata: { value: '', unit: '%' },
         },
-        ekosistemHabitat: '', // Akan di-parse dari string
+        ekosistemHabitat: '', 
         flora: {
             jumlahJenis: '',
-            pohonDominan: '', // Akan di-parse dari string
-            tumbuhanBawahSemak: '', // Akan di-parse dari string
-            tumbuhanPionir: '', // Akan di-parse dari string
-            tumbuhanKhasEndemik: '', // Akan di-parse dari string
+            pohonDominan: '',
+            tumbuhanBawahSemak: '', 
+            tumbuhanPionir: '', 
+            tumbuhanKhasEndemik: '', 
         },
         fauna: {
             jumlahJenis: { burung: '', mamalia: '', reptil: '', amfibi: '' },
-            mamalia: '', // Akan di-parse dari string
-            burung: '', // Akan di-parse dari string
+            mamalia: '', 
+            burung: '', 
         },
-        sejarahSingkat: '', // Akan di-parse dari string
-        aktivitasPengelolaan: '', // Akan di-parse dari string
-        fasilitasPendukung: '', // Akan di-parse dari string
-        ancamanKonservasi: '', // Akan di-parse dari string
-        upayaKonservasi: '', // Akan di-parse dari string
+        sejarahSingkat: '', 
+        aktivitasPengelolaan: '', 
+        fasilitasPendukung: '', 
+        ancamanKonservasi: '',
+        upayaKonservasi: '', 
         createdBy: '', // Akan diisi otomatis atau dari user yang login
     });
 
@@ -164,7 +163,7 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
                 setImagePreviewUrl(null);
             }
         } else {
-            // Reset form data and preview for 'Add' mode
+            // Reset form data 
             setFormData({
                 namaResmi: '', lokasi: '', wilayahAdministratif: '', image: null,
                 koordinatGeografis: { lintang: '', bujur: '' },
@@ -193,7 +192,7 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
         }
 
         if (fileInputRef.current) {
-            fileInputRef.current.value = ''; // Clear the selected file from input
+            fileInputRef.current.value = ''; 
         }
 
         return () => {
@@ -206,7 +205,7 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
 
-        // Handle nested state for iklim, koordinatGeografis, luas, ketinggian, fauna.jumlahJenis
+        // Handle nested state 
         if (name.startsWith('koordinatGeografis.')) {
             const subKey = name.split('.')[1];
             setFormData((prev) => ({
@@ -252,7 +251,7 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
                     kelembabanUdaraRataRata: { ...prev.iklim.kelembabanUdaraRataRata, [subKey]: value },
                 },
             }));
-        } else if (name.startsWith('iklim.')) { // For iklim.tipe
+        } else if (name.startsWith('iklim.')) { 
             const subKey = name.split('.')[1];
             setFormData((prev) => ({
                 ...prev,
@@ -273,7 +272,7 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
                     jumlahJenis: { ...prev.fauna.jumlahJenis, [subKey]: value },
                 },
             }));
-        } else if (name.startsWith('fauna.')) { // For fauna mamalia/burung (if not jumlahJenis)
+        } else if (name.startsWith('fauna.')) { // For fauna mamalia/burung 
             const subKey = name.split('.')[1];
             setFormData((prev) => ({
                 ...prev,
@@ -305,10 +304,10 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
                     ...newState[parentKey],
                     [subKey]: valueAsNumber,
                 };
-            } else if (parentKey) { // For iklim.curahHujanRataRata.value
+            } else if (parentKey) { 
                  newState.iklim.curahHujanRataRata = {
                     ...newState.iklim.curahHujanRataRata,
-                    value: valueAsString, // Keep it as string for "2.500 – 3.500"
+                    value: valueAsString, // Simpan sebagai string untuk "2.500 – 3.500"
                 };
             }
             return newState;
@@ -387,10 +386,10 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
 
         setIsUploadingImage(false);
 
-        // Helper function to parse multiline strings into arrays
+        // Helper function buat parse multiline string jadi array
         const parseMultilineString = (str) => str.split('\n').map(line => line.trim()).filter(Boolean);
 
-        // Helper function to parse "Nama: Deskripsi (Detail)" format for array of objects
+        // Helper function untuk parse "Nama: Deskripsi (Detail)" format ke array of objects
         const parseComplexArray = (str, type) => {
             const lines = parseMultilineString(str);
             return lines.map(line => {
@@ -508,7 +507,7 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
             fasilitasPendukung: parseMultilineString(formData.fasilitasPendukung),
             ancamanKonservasi: parseMultilineString(formData.ancamanKonservasi),
             upayaKonservasi: parseMultilineString(formData.upayaKonservasi),
-            createdBy: formData.createdBy, // Ini seharusnya diisi dari server atau context user login
+            createdBy: formData.createdBy, // Ini  diisi dari server atau context user login
         };
 
         console.log('Final data to submit from Modal (including image URL):', dataToSubmit);
@@ -922,14 +921,14 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
                             />
                         </FormControl>
 
-                        {/* Created By (Read-only for edit mode, can be auto-filled for create) */}
+                        {/* Created By */}
                         {isEdit && (
                             <FormControl id="createdBy">
                                 <FormLabel>Created By</FormLabel>
                                 <Input
                                     name="createdBy"
                                     value={formData.createdBy}
-                                    disabled // Ini biasanya diisi otomatis di backend
+                                    disabled // diisi otomatis
                                 />
                             </FormControl>
                         )}
@@ -938,7 +937,7 @@ const NationalParkFormModal = ({ isOpen, onClose, nationalPark, onSubmit, isEdit
 
                 <ModalFooter>
                     <Button variant="ghost" onClick={() => {
-                        // Reset form data to initial state or empty if adding new
+                        // Reset form data to initial state or empty jika menambahpak park baru?
                         if (initialNationalParkState.current) {
                             const nationalPark = initialNationalParkState.current;
                             const mapArrayToString = (arr) => Array.isArray(arr) ? arr.join('\n') : '';

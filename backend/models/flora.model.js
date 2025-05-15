@@ -5,19 +5,18 @@ const floraSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        unique: true // Nama ilmiah seharusnya unik
+        unique: true 
     },
     namaIlmiahLengkap: {
         type: String,
         trim: true,
-        // Contoh: Casuarina equisetifolia L.
     },
-    namaLokal: { // Tetap String tunggal sesuai permintaan
+    namaLokal: { 
         type: String,
         required: true,
         trim: true
     },
-    namaLokalLain: { // Atribut baru untuk nama lokal lain (jika ada)
+    namaLokalLain: { 
         type: [String],
         trim: true
     },
@@ -29,7 +28,7 @@ const floraSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    urlGambarLain: { // Atribut baru untuk menyimpan URL gambar lain
+    urlGambarLain: { 
         type: [String],
         trim: true
     },
@@ -62,199 +61,194 @@ const floraSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    varietas: { // Atribut baru untuk varietas atau sub-spesies
+    varietas: { 
         type: String,
         trim: true
     },
-    jenisTumbuhan: { // Contoh: Pohon tahunan, Semak, Herbal, dll.
+    jenisTumbuhan: { 
         type: String,
         trim: true
     },
-    tipePertumbuhan: { // Contoh: Tegak, Menjalar, Memanjat, Menggantung
+    tipePertumbuhan: { 
         type: String,
         trim: true
     },
-    kategoriFungsional: { // Contoh: Pohon peneduh, pelindung, penghasil kayu, obat
+    kategoriFungsional: { 
         type: [String],
         trim: true
     },
-    // --- Morfologi Vegetatif ---
-    tinggiMaksimal: { // Atribut baru, bisa dalam meter
+    tinggiMaksimal: { 
         type: String,
         trim: true
     },
-    diameterBatangMaksimal: { // Atribut baru, bisa dalam cm
+    diameterBatangMaksimal: { 
         type: String,
         trim: true
     },
-    deskripsiBatang: { // Atribut baru
+    deskripsiBatang: { 
         type: String,
         trim: true
     },
-    deskripsiKulitBatang: { // Atribut baru
+    deskripsiKulitBatang: { 
         type: String,
         trim: true
     },
-    deskripsiCabang: { // Atribut baru
+    deskripsiCabang: { 
         type: String,
         trim: true
     },
-    bentukTajuk: { // Atribut baru
+    bentukTajuk: { 
         type: String,
         trim: true
     },
-    jenisDaunSejati: { // Contoh: Sisik kecil, Tidak ada, Jarum, Lebar
+    jenisDaunSejati: { 
         type: String,
         trim: true
     },
-    deskripsiDaunSejati: { // Atribut baru
+    deskripsiDaunSejati: { 
         type: String,
         trim: true
     },
-    jenisRantingFotosintetik: { // Contoh: Silindris, pipih, beruas
+    jenisRantingFotosintetik: { 
         type: String,
         trim: true
     },
-    deskripsiRantingFotosintetik: { // Atribut baru
+    deskripsiRantingFotosintetik: { 
         type: String,
         trim: true
     },
-    tipeSistemPerakaran: { // Contoh: Tunggang, Serabut, Menyebar luas
+    tipeSistemPerakaran: { 
         type: String,
         trim: true
     },
-    deskripsiSistemPerakaran: { // Atribut baru
+    deskripsiSistemPerakaran: { 
         type: String,
         trim: true
     },
-    // --- Morfologi Generatif ---
     morfologiBunga: {
-        tipeKelamin: { type: String, trim: true }, // Contoh: Monoecious, Dioecious, Hermaprodit
+        tipeKelamin: { type: String, trim: true }, 
         deskripsiBungaJantan: { type: String, trim: true },
         deskripsiBungaBetina: { type: String, trim: true },
-        waktuBerbunga: { type: String, trim: true }, // Atribut baru
-        warnaBunga: { type: String, trim: true } // Atribut baru
+        waktuBerbunga: { type: String, trim: true }, 
+        warnaBunga: { type: String, trim: true } 
     },
     morfologiBuah: {
-        tipeBuah: { type: String, trim: true }, // Contoh: Kerucut, Buni, Kapsul
+        tipeBuah: { type: String, trim: true }, 
         deskripsiBuah: { type: String, trim: true },
-        ukuranBuah: { type: String, trim: true }, // Atribut baru
-        warnaBuah: { type: String, trim: true }, // Atribut baru
-        waktuBerbuah: { type: String, trim: true } // Atribut baru
+        ukuranBuah: { type: String, trim: true }, 
+        warnaBuah: { type: String, trim: true }, 
+        waktuBerbuah: { type: String, trim: true } 
     },
     morfologiBiji: {
         deskripsiBiji: { type: String, trim: true },
-        ukuranBiji: { type: String, trim: true }, // Atribut baru
-        warnaBiji: { type: String, trim: true }, // Atribut baru
-        bentukBiji: { type: String, trim: true }, // Atribut baru
-        mekanismePenyebaranBiji: { type: [String], trim: true } // Atribut baru, e.g., angin, hewan, air
+        ukuranBiji: { type: String, trim: true }, 
+        warnaBiji: { type: String, trim: true }, 
+        bentukBiji: { type: String, trim: true }, 
+        mekanismePenyebaranBiji: { type: [String], trim: true } 
     },
-    metodeReproduksi: { // Contoh: Biji, Stek, Cangkok, Tunas Akar
+    metodeReproduksi: { 
         type: [String],
         trim: true
     },
-    // --- Ekologi dan Kondisi Pertumbuhan ---
-    musimTumbuhOptimal: { // Contoh: Sepanjang tahun, Musim hujan, Musim kemarau
+    musimTumbuhOptimal: { 
         type: String,
         trim: true
     },
-    habitatAlami: { // Contoh: Zona litoral, Bukit pasir, Hutan mangrove
+    habitatAlami: { 
         type: String,
         trim: true
     },
-    kondisiTanahIdeal: { // Contoh: Berpasir, Lempung, Subur, Kurang subur, Salin
+    kondisiTanahIdeal: { 
         type: String,
         trim: true
     },
-    pHTanahOptimal: { // Atribut baru
+    pHTanahOptimal: { 
         type: String,
         trim: true
     },
-    drainaseTanahIdeal: { // Atribut baru
+    drainaseTanahIdeal: { 
         type: String,
         trim: true
     },
-    kondisiIklimOptimal: { // Contoh: Tropis, Subtropis, Hangat, Lembab, Curah hujan sedang-tinggi
+    kondisiIklimOptimal: { 
         type: String,
         trim: true
     },
-    toleransiKekeringan: { // Atribut baru
+    toleransiKekeringan: { 
         type: String,
         trim: true
     },
-    toleransiSalinitas: { // Atribut baru
+    toleransiSalinitas: { 
         type: String,
         trim: true
     },
-    toleransiAngin: { // Atribut baru
+    toleransiAngin: { 
         type: String,
         trim: true
     },
-    toleransiSuhu: { // Atribut baru
+    toleransiSuhu: { 
         type: String,
         trim: true
     },
-    sebaranGeografis: { // Bisa juga Array of String jika lebih dari satu lokasi spesifik
+    sebaranGeografis: { 
         type: String,
         trim: true
     },
-    ketinggianOptimal: { // Contoh: 0-500 mdpl
+    ketinggianOptimal: { 
         type: String,
         trim: true
     },
-    lajuPertumbuhan: { // Contoh: Cepat, Sedang, Lambat
+    lajuPertumbuhan: { 
         type: String,
         trim: true
     },
-    // --- Kegunaan dan Status ---
-    kegunaanUtama: { // Contoh: Konservasi pantai, Kayu bakar, Obat tradisional, Peneduh
+    kegunaanUtama: { 
         type: [String]
     },
-    deskripsiKegunaan: { // Atribut baru untuk detail kegunaan
+    deskripsiKegunaan: { 
         type: String,
         trim: true
     },
-    komponenBioaktif: { // Atribut baru, jika digunakan sebagai obat/tanaman pangan
+    komponenBioaktif: { 
         type: [String],
         trim: true
     },
-    potensiAncamanInvasif: { // Contoh: Di beberapa daerah invasif karena...
+    potensiAncamanInvasif: { 
         type: String,
         trim: true
     },
-    statusKonservasi: { // Contoh: NE (Not Evaluated), LC (Least Concern), EN (Endangered)
+    statusKonservasi: { 
         type: String,
         trim: true
     },
-    sumberDataStatusKonservasi: { // Atribut baru
+    sumberDataStatusKonservasi: { 
         type: String,
         trim: true
     },
-    nilaiEkologis: { // Contoh: Fiksasi nitrogen, Habitat satwa, Stabilisasi tanah
+    nilaiEkologis: { 
         type: String,
         trim: true
     },
-    sifatKimia: { // Contoh: Mengandung tanin, alkaloid, dll.
+    sifatKimia: { 
         type: String,
         trim: true
     },
-    kerentananPenyakitHama: { // Contoh: Relatif tahan, Rentan terhadap ...
+    kerentananPenyakitHama: { 
         type: String,
         trim: true
     },
-    // --- Metadata dan Referensi ---
-    referensiIlmiah: { // Atribut baru untuk sumber referensi
+    referensiIlmiah: { 
         type: [String],
         trim: true
     },
-    tanggalPenelitian: { // Atribut baru
+    tanggalPenelitian: { 
         type: Date
     },
-    peneliti: { // Atribut baru
+    peneliti: { 
         type: String,
         trim: true
     },
-    lokasiObservasi: { // Atribut baru
+    lokasiObservasi: { 
         type: String,
         trim: true
     },
@@ -263,7 +257,7 @@ const floraSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    catatanTambahan: { // Atribut baru untuk catatan umum
+    catatanTambahan: { 
         type: String,
         trim: true
     },

@@ -1,50 +1,49 @@
 import React from 'react'
 import {
-  Box,
-  Text,
-  VStack,
-  Icon,
-  Input,
-  useColorModeValue,
-  Center,
-  Button,
-  Image,
-  useDisclosure, // Import useDisclosure
-  AlertDialog, // Import AlertDialog
-  AlertDialogOverlay,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogBody,
-  AlertDialogFooter
+    Box,
+    Text,
+    VStack,
+    Icon,
+    Input,
+    useColorModeValue,
+    Center,
+    Button,
+    Image,
+    useDisclosure,
+    AlertDialog,
+    AlertDialogOverlay,
+    AlertDialogContent,
+    AlertDialogHeader,
+    AlertDialogBody,
+    AlertDialogFooter
 } from '@chakra-ui/react';
 import { FaCamera } from 'react-icons/fa';
-import { useState, useRef } from 'react'; // Import useRef
+import { useState, useRef } from 'react';
 
 const ScanPage = () => {
-  const borderGradient = useColorModeValue(
-    "linear(to-r, teal.400, blue.600)",
-    "linear(to-r, teal.300, cyan.500)"
-  );
-  const hoverShadow = useColorModeValue(
-    "0 0 20px rgba(4, 73, 73, 0.8)",
-    "0 0 25px rgba(0, 255, 255, 0.8)"
-  );
+    const borderGradient = useColorModeValue(
+        "linear(to-r, teal.400, blue.600)",
+        "linear(to-r, teal.300, cyan.500)"
+    );
+    const hoverShadow = useColorModeValue(
+        "0 0 20px rgba(4, 73, 73, 0.8)",
+        "0 0 25px rgba(0, 255, 255, 0.8)"
+    );
 
-  const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null);
 
-  // State and ref for the pop-up
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = useRef(); // To focus on the close button for accessibility
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = useRef();
 
-  const handleImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setSelectedImage(URL.createObjectURL(event.target.files[0]));
-    }
-  };
+    const handleImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            setSelectedImage(URL.createObjectURL(event.target.files[0]));
+        }
+    };
 
-  const handleScanNowClick = () => {
-    onOpen(); // Open the pop-up when Scan Now is clicked
-  };
+    const handleScanNowClick = () => {
+        onOpen();
+    };
 
   return (
     <Center minH="100vh" p={4}>
@@ -137,14 +136,14 @@ const ScanPage = () => {
               transform: "scale(1.02)",
             }}
             transition="all 0.2s ease-in-out"
-            onClick={handleScanNowClick} // Call the handler to open the pop-up
+            onClick={handleScanNowClick} 
           >
             Scan Now
           </Button>
         </VStack>
       </Box>
 
-      {/* AlertDialog for the pop-up */}
+      {/* AlertDialog untuk the pop-up */}
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}

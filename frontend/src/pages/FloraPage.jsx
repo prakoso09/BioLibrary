@@ -27,7 +27,6 @@ import { isLoggedIn } from '../utils/auth';
 const MotionButton = motion(Button);
 
 const FloraPage = () => {
-    // Enhanced light mode colors
     const accentColor = useColorModeValue('teal.600', 'teal.300');
     const textColor = useColorModeValue('gray.800', 'gray.200');
     const bgColor = useColorModeValue('white', 'gray.800');
@@ -38,9 +37,9 @@ const FloraPage = () => {
 
     const { fetchFlora, flora } = useFloraStore();
     const [searchTerm, setSearchTerm] = useState("");
-    const [searchCategory, setSearchCategory] = useState("namaLokal"); // Default ke namaLokal
+    const [searchCategory, setSearchCategory] = useState("namaLokal"); 
     const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
-    const [userLoggedInGmail, setUserLoggedInGmail] = useState(null); // <--- TAMBAHKAN STATE INI
+    const [userLoggedInGmail, setUserLoggedInGmail] = useState(null); 
     
 
     // Untuk AlertDialog
@@ -75,7 +74,7 @@ const FloraPage = () => {
         if (Array.isArray(valueToSearch)) {
             return valueToSearch.some(val => val.toLowerCase().includes(lowerCaseSearchTerm));
         }
-        // Handle nested objects for morphology
+        // Handle nested objects untuk morphology
         if (searchCategory.startsWith("morfologiBunga.")) {
             const field = searchCategory.split(".")[1];
             valueToSearch = item.morfologiBunga?.[field];
@@ -110,7 +109,7 @@ const FloraPage = () => {
                     Flora Library 🍀
                 </Text>
 
-                {/* Filter Section */}
+                {/* Filter */}
                 <VStack spacing={4} w="full" maxW="500px" margin="auto" p={6} 
                     bg={cardBgColor} borderRadius="xl" boxShadow="sm"
                     borderWidth="1px" borderColor={borderColor}>
@@ -205,8 +204,6 @@ const FloraPage = () => {
                             <option value="lokasiObservasi">Observation Location</option>
                             <option value="deskripsi">Description</option>
                             <option value="catatanTambahan">Additional Notes</option>
-                            {/* Anda bisa menambahkan option untuk tanggalPenelitian jika ingin mencari berdasarkan tanggal,
-                                namun pencarian teks langsung mungkin tidak relevan. */}
                         </Select>
                     </Flex>
 

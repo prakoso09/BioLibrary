@@ -1,4 +1,3 @@
-// pages/NationalParkDetailPage.jsx
 import React, { useEffect, useState } from 'react';
 import {
     Container,
@@ -23,8 +22,8 @@ import {
 import { ArrowLeftIcon, EditIcon, DeleteIcon, CheckCircleIcon, MinusIcon, PlusSquareIcon } from '@chakra-ui/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useNationalParkStore } from '../store/nationalPark'; // Pastikan Anda mengimpor store yang benar
-import NationalParkFormModal from '../components/NationalParkFormModal'; // Asumsi Anda punya modal update
+import { useNationalParkStore } from '../store/nationalPark'; 
+import NationalParkFormModal from '../components/NationalParkFormModal';
 import DeleteConfirmationModal from '../components/DeleteConfirmationModal';
 import { getUserRole, isLoggedIn, getUserGmail } from '../utils/auth';
 
@@ -38,8 +37,8 @@ const NationalParkDetailPage = () => {
         fetchNationalParkById,
         singleNationalPark,
         loadingSingleNationalPark,
-        updateNationalPark, // Asumsi Anda memiliki action update di store
-        deleteNationalPark, // Asumsi Anda memiliki action delete di store
+        updateNationalPark, 
+        deleteNationalPark, 
     } = useNationalParkStore();
 
     const {
@@ -65,7 +64,7 @@ const NationalParkDetailPage = () => {
         setUserLoggedInGmail(getUserGmail());
     }, [fetchNationalParkById, id]);
 
-    const handleGoBack = () => navigate('/NationalPark'); // Sesuaikan rute kembali
+    const handleGoBack = () => navigate('/NationalPark'); 
 
     const bg = useColorModeValue(
         'linear-gradient(to right, rgba(255,255,255,0.3), rgba(220,255,250,0.2))',
@@ -99,7 +98,7 @@ const NationalParkDetailPage = () => {
     console.log("canEditOrDelete (Final Decision):", canEditOrDelete);
     console.log("--- END DEBUG ---");
 
-    // Helper function to render lists
+    // Helper function untuk render lists
     const renderList = (items) => {
         if (!items || items.length === 0) return <Text fontSize="lg" color={textColor}>N/A</Text>;
         return (
@@ -114,7 +113,7 @@ const NationalParkDetailPage = () => {
         );
     };
 
-    // Helper function to render complex lists (e.g., flora, fauna, ekosistem)
+    // Helper function untuk render complex lists (e.g., flora, fauna)
     const renderComplexList = (data, type) => {
         if (!data || data.length === 0) return <Text fontSize="lg" color={textColor}>N/A</Text>;
 
@@ -173,7 +172,7 @@ const NationalParkDetailPage = () => {
     return (
        <Box  minH={"850vh"} bg={useColorModeValue('rgba(194, 243, 245, 0.9)', "gray.900")} >
         <MotionContainer
-            maxW="container.xl" // Ubah ke xl untuk konten yang lebih banyak
+            maxW="container.xl"
             mt={10}
             mb={10}
             initial={{ opacity: 0, y: 20 }}
@@ -239,7 +238,7 @@ const NationalParkDetailPage = () => {
 
                     <Divider borderColor={borderColor} opacity={0.5} />
 
-                    {/* Overview Section */}
+                    {/* Overview */}
                     <Heading as="h2" size="lg" color={headingColor}>Overview</Heading>
                     <Box w="full">
                         <Text fontWeight="bold" fontSize="xl" color={headingColor}>Nama Resmi</Text>
@@ -283,7 +282,7 @@ const NationalParkDetailPage = () => {
 
                     <Divider borderColor={borderColor} opacity={0.5} />
 
-                    {/* Geology & Topography Section */}
+                    {/* Geology & Topography  */}
                     {(singleNationalPark.topografi || singleNationalPark.geologi) && (
                         <>
                             <Heading as="h2" size="lg" color={headingColor}>Geology & Topography</Heading>
@@ -304,7 +303,7 @@ const NationalParkDetailPage = () => {
 
                     <Divider borderColor={borderColor} opacity={0.5} />
 
-                    {/* Climate Section */}
+                    {/* Climate */}
                     {singleNationalPark.iklim && (
                         <>
                             <Heading as="h2" size="lg" color={headingColor}>Iklim</Heading>
@@ -482,15 +481,11 @@ const NationalParkDetailPage = () => {
 
             {canEditOrDelete && (
                 <>
-                    {/* Anda perlu membuat NationalParkFormModal atau menggunakan modal generik */}
-                    {/* Jika Anda belum memiliki NationalParkFormModal, Anda bisa mengadaptasi CreateNationalParkPage menjadi modal */}
                     <NationalParkFormModal
                         isOpen={isUpdateOpen}
                         onClose={onUpdateClose}
                         nationalPark={singleNationalPark} // Pass data untuk pre-fill form
                         onSubmit={async (updatedData) => {
-                            // Pastikan Anda menangani transformasi data dari form (string ke array/objek)
-                            // seperti yang dilakukan di CreateNationalParkPage
                             console.log("Submitting update for National Park:", updatedData);
                             await updateNationalPark(singleNationalPark._id, updatedData);
                             await fetchNationalParkById(singleNationalPark._id); // Refresh data setelah update

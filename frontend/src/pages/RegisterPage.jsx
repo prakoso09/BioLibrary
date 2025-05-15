@@ -1,4 +1,3 @@
-// pages/register.jsx
 import {
   Box,
   Button,
@@ -10,25 +9,24 @@ import {
   VStack,
   useColorModeValue,
   Text,
-  useToast, // Import useToast
-  useColorMode, // Import useColorMode
-  Link, // Import Link dari Chakra UI
+  useToast,
+  useColorMode,
+  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Form, useNavigate } from "react-router-dom"; // Import useNavigate
-import axios from "axios"; // Import axios untuk mengirim request HTTP
+import { Form, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
-  const { colorMode } = useColorMode(); // Mendapatkan mode warna saat ini
+  const { colorMode } = useColorMode();
 
-  // Sesuaikan gradient dan shadow agar sama dengan login
   const borderGradient = useColorModeValue(
-    "linear(to-r, teal.400, blue.600)", // Mode terang: warna lebih cerah
-    "linear(to-r, teal.300, cyan.500)" // Mode gelap: warna lebih menonjol
+    "linear(to-r, teal.400, blue.600)",
+    "linear(to-r, teal.300, cyan.500)"
   );
   const hoverShadow = useColorModeValue(
-    "0 0 20px rgba(4, 73, 73, 0.8)", // Mode terang: shadow lebih jelas
-    "0 0 25px rgba(0, 255, 255, 0.8)" // Mode gelap: shadow lebih intens
+    "0 0 20px rgba(4, 73, 73, 0.8)",
+    "0 0 25px rgba(0, 255, 255, 0.8)"
   );
 
   const [form, setForm] = useState({
@@ -42,15 +40,14 @@ const Register = () => {
     nidn: "",
   });
 
-  const toast = useToast(); // Inisialisasi toast
-  const navigate = useNavigate(); // Inisialisasi navigate
-
+  const toast = useToast();
+  const navigate = useNavigate();
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Mengirimkan permintaan register ke backend (sesuaikan endpoint Anda)
+      // Mengirimkan permintaan register ke backend 
       const response = await axios.post("http://localhost:5000/api/data/register", form);
       
       toast({
@@ -82,53 +79,53 @@ const Register = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      bg={useColorModeValue("gray.50", "gray.900")} // Background yang lebih halus
-      p={{ base: 4, md: 6 }} // Padding responsif
+      bg={useColorModeValue("gray.50", "gray.900")}
+      p={{ base: 4, md: 6 }} 
     >
       <Box
-        maxW={{ base: "xs", md: "sm", lg: "md" }} // Ukuran kotak responsif, sama dengan login
+        maxW={{ base: "xs", md: "sm", lg: "md" }} 
         mx="auto"
-        p={{ base: 6, md: 7 }} // Padding disesuaikan
-        borderRadius="lg" // Radius sudut
+        p={{ base: 6, md: 7 }} 
+        borderRadius="lg"
         borderWidth="2px"
         borderColor="transparent"
         bgGradient={borderGradient}
         boxShadow={hoverShadow}
-        transition="all 0.3s ease-in-out" // Efek transisi untuk hover
+        transition="all 0.3s ease-in-out" 
         _hover={{
-          transform: "translateY(-5px)", // Efek sedikit terangkat saat hover
+          transform: "translateY(-5px)", 
           boxShadow: hoverShadow,
         }}
       >
         <VStack
-          spacing={5} // Spacing dikurangi
+          spacing={5}
           as="form"
           onSubmit={handleSubmit}
-          bg={useColorModeValue("white", "gray.700")} // Background Vstack disesuaikan mode warna
-          p={{ base: 5, md: 7 }} // Padding responsif
-          borderRadius="md" // Radius sudut
-          boxShadow="lg" // Bayangan pada form itu sendiri
+          bg={useColorModeValue("white", "gray.700")}
+          p={{ base: 5, md: 7 }} 
+          borderRadius="md" 
+          boxShadow="lg" 
         >
           <Heading
-            size="lg" // Ukuran heading
-            mb={3} // Margin bawah
-            color={useColorModeValue("teal.600", "teal.300")} // Warna heading
+            size="lg"
+            mb={3}
+            color={useColorModeValue("teal.600", "teal.300")}
           >
             Daftar Akun Baru
           </Heading>
           <Text
-            fontSize="sm" // Ukuran teks
-            mb={3} // Margin bawah
+            fontSize="sm" 
+            mb={3} 
             color={useColorModeValue("gray.600", "gray.300")}
             textAlign="center"
           >
             Silakan isi detail di bawah untuk membuat akun Anda.
           </Text>
-            {/* Input Nama (Field Baru) */}
+            {/* Input nama */}
           <FormControl id="name" isRequired>
             <FormLabel color={useColorModeValue("gray.700", "gray.200")}>Nama Lengkap</FormLabel>
             <Input
-              name="name" // <-- Nama field: name
+              name="name" 
               value={form.name}
               onChange={handleChange}
               placeholder="Nama Lengkap Anda"
@@ -145,8 +142,8 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Nama Pengguna Anda"
               size="md" // Ukuran input
-              focusBorderColor={useColorModeValue("teal.500", "cyan.400")} // Warna border saat fokus
-              _placeholder={{ color: useColorModeValue("gray.400", "gray.500") }} // Warna placeholder
+              focusBorderColor={useColorModeValue("teal.500", "cyan.400")} 
+              _placeholder={{ color: useColorModeValue("gray.400", "gray.500") }} 
             />
           </FormControl>
 
@@ -200,7 +197,7 @@ const Register = () => {
               placeholder="Pilih role"
               value={form.role}
               onChange={handleChange}
-              size="md" // Ukuran select
+              size="md" 
               focusBorderColor={useColorModeValue("teal.500", "cyan.400")}
             >
               <option value="Mahasiswa">Mahasiswa</option>
@@ -242,8 +239,8 @@ const Register = () => {
             type="submit"
             colorScheme="teal"
             width="full"
-            size="md" // Ukuran tombol
-            mt={3} // Margin atas
+            size="md" 
+            mt={3} 
             _hover={{
               bg: useColorModeValue("teal.600", "teal.400"),
               transform: "scale(1.02)",

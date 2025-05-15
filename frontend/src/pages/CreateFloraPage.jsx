@@ -11,8 +11,8 @@ import {
   Flex,
   IconButton,
   Text,
-  Textarea, // Tambahkan Textarea untuk deskripsi panjang
-  SimpleGrid, // Untuk tata letak yang lebih rapi
+  Textarea, 
+  SimpleGrid, 
 } from '@chakra-ui/react';
 import { useFloraStore } from '../store/flora';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,6 @@ import { ArrowLeftIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
-// Menggunakan motion(Component) adalah cara yang benar untuk membungkus komponen Chakra UI
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);
 
@@ -429,11 +428,11 @@ const CreateFloraPage = () => {
   };
 
   return (
-    <Container maxW="container.lg" mt={10}>
+<Container maxW="container.lg" mt={10}>
       <Flex mb={8} align="center">
         <IconButton
           icon={<ArrowLeftIcon />}
-          aria-label="Back to Flora"
+          aria-label="Kembali ke Flora"
           onClick={handleGoBack}
           variant="ghost"
           size="lg"
@@ -441,7 +440,7 @@ const CreateFloraPage = () => {
           _hover={{ bg: useColorModeValue('gray.200', 'whiteAlpha.200') }}
         />
         <Heading as="h1" size="2xl" textAlign="center" ml={4} color="white">
-          Add New Flora
+          Tambah Flora Baru
         </Heading>
       </Flex>
 
@@ -462,95 +461,95 @@ const CreateFloraPage = () => {
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
         <VStack spacing={5} align="stretch">
-          {/* General Information */}
+          {/* Informasi Umum */}
           <Heading size="md" color="whiteAlpha.800" mt={4}>Informasi Umum</Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
-            <Input placeholder="Scientific Name" name="namaIlmiah" value={newFlora.namaIlmiah} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Full Scientific Name" name="namaIlmiahLengkap" value={newFlora.namaIlmiahLengkap} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Local Name" name="namaLokal" value={newFlora.namaLokal} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Nama Ilmiah" name="namaIlmiah" value={newFlora.namaIlmiah} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Nama Ilmiah Lengkap" name="namaIlmiahLengkap" value={newFlora.namaIlmiahLengkap} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Nama Lokal" name="namaLokal" value={newFlora.namaLokal} onChange={handleChange} {...inputStyle} />
             <Box>
               <Input
-                placeholder="Other Local Name (add one by one)"
+                placeholder="Nama Lokal Lain (tambahkan satu per satu)"
                 value={namaLokalLainInput}
                 onChange={(e) => setNamaLokalLainInput(e.target.value)}
                 {...inputStyle}
               />
-              <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setNamaLokalLainInput, newFlora.namaLokalLain, namaLokalLainInput, 5)} size="sm" colorScheme="teal">Add Other Local Name</Button>
+              <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setNamaLokalLainInput, newFlora.namaLokalLain, namaLokalLainInput, 5)} size="sm" colorScheme="teal">Tambah Nama Lokal Lain</Button>
               {newFlora.namaLokalLain.length > 0 && (
-                <Text color="grey.900" fontSize="sm" mt={1}>Added: {newFlora.namaLokalLain.join(', ')}</Text>
+                <Text color="grey.900" fontSize="sm" mt={1}>Ditambahkan: {newFlora.namaLokalLain.join(', ')}</Text>
               )}
             </Box>
-            <Input placeholder="Family Name" name="namaKeluarga" value={newFlora.namaKeluarga} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Division" name="divisi" value={newFlora.divisi} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Class" name="kelas" value={newFlora.kelas} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Order" name="ordo" value={newFlora.ordo} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Family" name="famili" value={newFlora.famili} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Nama Keluarga" name="namaKeluarga" value={newFlora.namaKeluarga} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Divisi" name="divisi" value={newFlora.divisi} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Kelas" name="kelas" value={newFlora.kelas} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Ordo" name="ordo" value={newFlora.ordo} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Famili" name="famili" value={newFlora.famili} onChange={handleChange} {...inputStyle} />
             <Input placeholder="Genus" name="genus" value={newFlora.genus} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Species" name="spesies" value={newFlora.spesies} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Variety/Sub-species" name="varietas" value={newFlora.varietas} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Plant Type (e.g., Annual Tree, Shrub, Herb)" name="jenisTumbuhan" value={newFlora.jenisTumbuhan} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Growth Type (e.g., Upright, Creeping, Climbing)" name="tipePertumbuhan" value={newFlora.tipePertumbuhan} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Spesies" name="spesies" value={newFlora.spesies} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Varietas/Sub-spesies" name="varietas" value={newFlora.varietas} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Jenis Tumbuhan (contoh: Pohon Tahunan, Semak, Herbal)" name="jenisTumbuhan" value={newFlora.jenisTumbuhan} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Tipe Pertumbuhan (contoh: Tegak, Merambat, Memanjat)" name="tipePertumbuhan" value={newFlora.tipePertumbuhan} onChange={handleChange} {...inputStyle} />
             <Box>
               <Input
-                placeholder="Functional Category (e.g., Shade tree, Medicinal, Wood)"
+                placeholder="Kategori Fungsional (contoh: Pohon peneduh, Obat-obatan, Kayu)"
                 value={kategoriFungsionalInput}
                 onChange={(e) => setKategoriFungsionalInput(e.target.value)}
                 {...inputStyle}
               />
-              <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setKategoriFungsionalInput, newFlora.kategoriFungsional, kategoriFungsionalInput, 5)} size="sm" colorScheme="teal">Add Functional Category</Button>
+              <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setKategoriFungsionalInput, newFlora.kategoriFungsional, kategoriFungsionalInput, 5)} size="sm" colorScheme="teal">Tambah Kategori Fungsional</Button>
               {newFlora.kategoriFungsional.length > 0 && (
-                <Text color="grey.900" fontSize="sm" mt={1}>Added: {newFlora.kategoriFungsional.join(', ')}</Text>
+                <Text color="grey.900" fontSize="sm" mt={1}>Ditambahkan: {newFlora.kategoriFungsional.join(', ')}</Text>
               )}
             </Box>
           </SimpleGrid>
 
-          {/* Vegetative Morphology */}
+          {/* Morfologi Vegetatif */}
           <Heading size="md" color="whiteAlpha.800" mt={4}>Morfologi Vegetatif</Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
-            <Input placeholder="Maximum Height (e.g., 20m)" name="tinggiMaksimal" value={newFlora.tinggiMaksimal} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Maximum Stem Diameter (e.g., 50cm)" name="diameterBatangMaksimal" value={newFlora.diameterBatangMaksimal} onChange={handleChange} {...inputStyle} />
-            <Textarea placeholder="Stem Description" name="deskripsiBatang" value={newFlora.deskripsiBatang} onChange={handleChange} {...inputStyle} />
-            <Textarea placeholder="Bark Description" name="deskripsiKulitBatang" value={newFlora.deskripsiKulitBatang} onChange={handleChange} {...inputStyle} />
-            <Textarea placeholder="Branch Description" name="deskripsiCabang" value={newFlora.deskripsiCabang} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Canopy Shape (e.g., Conical, Rounded)" name="bentukTajuk" value={newFlora.bentukTajuk} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="True Leaf Type (e.g., Small scale, Needle, Broad)" name="jenisDaunSejati" value={newFlora.jenisDaunSejati} onChange={handleChange} {...inputStyle} />
-            <Textarea placeholder="True Leaf Description" name="deskripsiDaunSejati" value={newFlora.deskripsiDaunSejati} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Photosynthetic Twig Type (e.g., Cylindrical, Flat)" name="jenisRantingFotosintetik" value={newFlora.jenisRantingFotosintetik} onChange={handleChange} {...inputStyle} />
-            <Textarea placeholder="Photosynthetic Twig Description" name="deskripsiRantingFotosintetik" value={newFlora.deskripsiRantingFotosintetik} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Root System Type (e.g., Taproot, Fibrous, Spreading)" name="tipeSistemPerakaran" value={newFlora.tipeSistemPerakaran} onChange={handleChange} {...inputStyle} />
-            <Textarea placeholder="Root System Description" name="deskripsiSistemPerakaran" value={newFlora.deskripsiSistemPerakaran} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Tinggi Maksimal (contoh: 20m)" name="tinggiMaksimal" value={newFlora.tinggiMaksimal} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Diameter Batang Maksimal (contoh: 50cm)" name="diameterBatangMaksimal" value={newFlora.diameterBatangMaksimal} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Batang" name="deskripsiBatang" value={newFlora.deskripsiBatang} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Kulit Batang" name="deskripsiKulitBatang" value={newFlora.deskripsiKulitBatang} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Cabang" name="deskripsiCabang" value={newFlora.deskripsiCabang} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Bentuk Tajuk (contoh: Kerucut, Membulat)" name="bentukTajuk" value={newFlora.bentukTajuk} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Jenis Daun Sejati (contoh: Sisik kecil, Jarum, Lebar)" name="jenisDaunSejati" value={newFlora.jenisDaunSejati} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Daun Sejati" name="deskripsiDaunSejati" value={newFlora.deskripsiDaunSejati} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Jenis Ranting Fotosintetik (contoh: Silinder, Pipih)" name="jenisRantingFotosintetik" value={newFlora.jenisRantingFotosintetik} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Ranting Fotosintetik" name="deskripsiRantingFotosintetik" value={newFlora.deskripsiRantingFotosintetik} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Tipe Sistem Perakaran (contoh: Tunggang, Serabut, Menyebar)" name="tipeSistemPerakaran" value={newFlora.tipeSistemPerakaran} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Sistem Perakaran" name="deskripsiSistemPerakaran" value={newFlora.deskripsiSistemPerakaran} onChange={handleChange} {...inputStyle} />
           </SimpleGrid>
 
-          {/* Generative Morphology (Flowers) */}
+          {/* Morfologi Generatif (Bunga) */}
           <Heading size="md" color="whiteAlpha.800" mt={4}>Morfologi Generatif: Bunga</Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
-            <Input placeholder="Flower Sex Type (e.g., Monoecious, Dioecious, Hermaphrodite)" name="morfologiBunga.tipeKelamin" value={newFlora.morfologiBunga.tipeKelamin} onChange={handleChange} {...inputStyle} />
-            <Textarea placeholder="Male Flower Description" name="morfologiBunga.deskripsiBungaJantan" value={newFlora.morfologiBunga.deskripsiBungaJantan} onChange={handleChange} {...inputStyle} />
-            <Textarea placeholder="Female Flower Description" name="morfologiBunga.deskripsiBungaBetina" value={newFlora.morfologiBunga.deskripsiBungaBetina} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Flowering Time (e.g., May-July)" name="morfologiBunga.waktuBerbunga" value={newFlora.morfologiBunga.waktuBerbunga} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Flower Color" name="morfologiBunga.warnaBunga" value={newFlora.morfologiBunga.warnaBunga} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Tipe Kelamin Bunga (contoh: Monoecious, Dioecious, Hermaphrodite)" name="morfologiBunga.tipeKelamin" value={newFlora.morfologiBunga.tipeKelamin} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Bunga Jantan" name="morfologiBunga.deskripsiBungaJantan" value={newFlora.morfologiBunga.deskripsiBungaJantan} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Bunga Betina" name="morfologiBunga.deskripsiBungaBetina" value={newFlora.morfologiBunga.deskripsiBungaBetina} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Waktu Berbunga (contoh: Mei-Juli)" name="morfologiBunga.waktuBerbunga" value={newFlora.morfologiBunga.waktuBerbunga} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Warna Bunga" name="morfologiBunga.warnaBunga" value={newFlora.morfologiBunga.warnaBunga} onChange={handleChange} {...inputStyle} />
           </SimpleGrid>
 
-          {/* Generative Morphology (Fruits) */}
+          {/* Morfologi Generatif (Buah) */}
           <Heading size="md" color="whiteAlpha.800" mt={4}>Morfologi Generatif: Buah</Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
-            <Input placeholder="Fruit Type (e.g., Cone, Berry, Capsule)" name="morfologiBuah.tipeBuah" value={newFlora.morfologiBuah.tipeBuah} onChange={handleChange} {...inputStyle} />
-            <Textarea placeholder="Fruit Description" name="morfologiBuah.deskripsiBuah" value={newFlora.morfologiBuah.deskripsiBuah} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Fruit Size (e.g., 2-3 cm)" name="morfologiBuah.ukuranBuah" value={newFlora.morfologiBuah.ukuranBuah} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Fruit Color" name="morfologiBuah.warnaBuah" value={newFlora.morfologiBuah.warnaBuah} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Fruiting Time (e.g., July-September)" name="morfologiBuah.waktuBerbuah" value={newFlora.morfologiBuah.waktuBerbuah} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Tipe Buah (contoh: Kerucut, Beri, Kapsul)" name="morfologiBuah.tipeBuah" value={newFlora.morfologiBuah.tipeBuah} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Buah" name="morfologiBuah.deskripsiBuah" value={newFlora.morfologiBuah.deskripsiBuah} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Ukuran Buah (contoh: 2-3 cm)" name="morfologiBuah.ukuranBuah" value={newFlora.morfologiBuah.ukuranBuah} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Warna Buah" name="morfologiBuah.warnaBuah" value={newFlora.morfologiBuah.warnaBuah} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Waktu Berbuah (contoh: Juli-September)" name="morfologiBuah.waktuBerbuah" value={newFlora.morfologiBuah.waktuBerbuah} onChange={handleChange} {...inputStyle} />
           </SimpleGrid>
 
-          {/* Generative Morphology (Seeds) */}
+          {/* Morfologi Generatif (Biji) */}
           <Heading size="md" color="whiteAlpha.800" mt={4}>Morfologi Generatif: Biji</Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
-            <Textarea placeholder="Seed Description" name="morfologiBiji.deskripsiBiji" value={newFlora.morfologiBiji.deskripsiBiji} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Seed Size (e.g., 0.5 cm)" name="morfologiBiji.ukuranBiji" value={newFlora.morfologiBiji.ukuranBiji} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Seed Color" name="morfologiBiji.warnaBiji" value={newFlora.morfologiBiji.warnaBiji} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Seed Shape" name="morfologiBiji.bentukBiji" value={newFlora.morfologiBiji.bentukBiji} onChange={handleChange} {...inputStyle} />
+            <Textarea placeholder="Deskripsi Biji" name="morfologiBiji.deskripsiBiji" value={newFlora.morfologiBiji.deskripsiBiji} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Ukuran Biji (contoh: 0.5 cm)" name="morfologiBiji.ukuranBiji" value={newFlora.morfologiBiji.ukuranBiji} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Warna Biji" name="morfologiBiji.warnaBiji" value={newFlora.morfologiBiji.warnaBiji} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Bentuk Biji" name="morfologiBiji.bentukBiji" value={newFlora.morfologiBiji.bentukBiji} onChange={handleChange} {...inputStyle} />
             <Box>
               <Input
-                placeholder="Seed Dispersal Mechanism (e.g., Wind, Animal, Water)"
+                placeholder="Mekanisme Penyebaran Biji (contoh: Angin, Hewan, Air)"
                 value={mekanismePenyebaranBijiInput}
                 onChange={(e) => setMekanismePenyebaranBijiInput(e.target.value)}
                 {...inputStyle}
@@ -564,109 +563,109 @@ const CreateFloraPage = () => {
                   }
                 }));
                 setMekanismePenyebaranBijiInput("");
-              }} size="sm" colorScheme="teal">Add Dispersal Mechanism</Button>
+              }} size="sm" colorScheme="teal">Tambah Mekanisme Penyebaran</Button>
               {newFlora.morfologiBiji.mekanismePenyebaranBiji.length > 0 && (
-                <Text color="grey.900" fontSize="sm" mt={1}>Added: {newFlora.morfologiBiji.mekanismePenyebaranBiji.join(', ')}</Text>
+                <Text color="grey.900" fontSize="sm" mt={1}>Ditambahkan: {newFlora.morfologiBiji.mekanismePenyebaranBiji.join(', ')}</Text>
               )}
             </Box>
           </SimpleGrid>
 
           <Box>
             <Input
-              placeholder="Reproduction Method (e.g., Seed, Cutting, Grafting)"
+              placeholder="Metode Reproduksi (contoh: Biji, Stek, Okulasi)"
               value={metodeReproduksiInput}
               onChange={(e) => setMetodeReproduksiInput(e.target.value)}
               {...inputStyle}
             />
-            <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setMetodeReproduksiInput, newFlora.metodeReproduksi, metodeReproduksiInput, 5)} size="sm" colorScheme="teal">Add Reproduction Method</Button>
+            <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setMetodeReproduksiInput, newFlora.metodeReproduksi, metodeReproduksiInput, 5)} size="sm" colorScheme="teal">Tambah Metode Reproduksi</Button>
             {newFlora.metodeReproduksi.length > 0 && (
-              <Text color="grey.900" fontSize="sm" mt={1}>Added: {newFlora.metodeReproduksi.join(', ')}</Text>
+              <Text color="grey.900" fontSize="sm" mt={1}>Ditambahkan: {newFlora.metodeReproduksi.join(', ')}</Text>
             )}
           </Box>
 
-          {/* Ecology and Growth Conditions */}
+          {/* Ekologi dan Kondisi Pertumbuhan */}
           <Heading size="md" color="whiteAlpha.800" mt={4}>Ekologi dan Kondisi Pertumbuhan</Heading>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
-            <Input placeholder="Optimal Growing Season (e.g., All year, Rainy season)" name="musimTumbuhOptimal" value={newFlora.musimTumbuhOptimal} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Natural Habitat (e.g., Littoral zone, Sand dune, Mangrove forest)" name="habitatAlami" value={newFlora.habitatAlami} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Ideal Soil Conditions (e.g., Sandy, Clay, Fertile, Saline)" name="kondisiTanahIdeal" value={newFlora.kondisiTanahIdeal} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Optimal Soil pH" name="pHTanahOptimal" value={newFlora.pHTanahOptimal} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Ideal Soil Drainage" name="drainaseTanahIdeal" value={newFlora.drainaseTanahIdeal} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Optimal Climate Conditions (e.g., Tropical, Subtropical, Warm, Humid)" name="kondisiIklimOptimal" value={newFlora.kondisiIklimOptimal} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Drought Tolerance" name="toleransiKekeringan" value={newFlora.toleransiKekeringan} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Salinity Tolerance" name="toleransiSalinitas" value={newFlora.toleransiSalinitas} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Wind Tolerance" name="toleransiAngin" value={newFlora.toleransiAngin} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Temperature Tolerance" name="toleransiSuhu" value={newFlora.toleransiSuhu} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Geographic Distribution" name="sebaranGeografis" value={newFlora.sebaranGeografis} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Optimal Altitude (e.g., 0-500 masl)" name="ketinggianOptimal" value={newFlora.ketinggianOptimal} onChange={handleChange} {...inputStyle} />
-            <Input placeholder="Growth Rate (e.g., Fast, Moderate, Slow)" name="lajuPertumbuhan" value={newFlora.lajuPertumbuhan} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Musim Tumbuh Optimal (contoh: Sepanjang tahun, Musim hujan)" name="musimTumbuhOptimal" value={newFlora.musimTumbuhOptimal} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Habitat Alami (contoh: Zona litoral, Gumuk pasir, Hutan bakau)" name="habitatAlami" value={newFlora.habitatAlami} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Kondisi Tanah Ideal (contoh: Berpasir, Lempung, Subur, Salin)" name="kondisiTanahIdeal" value={newFlora.kondisiTanahIdeal} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="pH Tanah Optimal" name="pHTanahOptimal" value={newFlora.pHTanahOptimal} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Drainase Tanah Ideal" name="drainaseTanahIdeal" value={newFlora.drainaseTanahIdeal} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Kondisi Iklim Optimal (contoh: Tropis, Subtropis, Hangat, Lembap)" name="kondisiIklimOptimal" value={newFlora.kondisiIklimOptimal} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Toleransi Kekeringan" name="toleransiKekeringan" value={newFlora.toleransiKekeringan} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Toleransi Salinitas" name="toleransiSalinitas" value={newFlora.toleransiSalinitas} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Toleransi Angin" name="toleransiAngin" value={newFlora.toleransiAngin} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Toleransi Suhu" name="toleransiSuhu" value={newFlora.toleransiSuhu} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Sebaran Geografis" name="sebaranGeografis" value={newFlora.sebaranGeografis} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Ketinggian Optimal (contoh: 0-500 mdpl)" name="ketinggianOptimal" value={newFlora.ketinggianOptimal} onChange={handleChange} {...inputStyle} />
+            <Input placeholder="Laju Pertumbuhan (contoh: Cepat, Sedang, Lambat)" name="lajuPertumbuhan" value={newFlora.lajuPertumbuhan} onChange={handleChange} {...inputStyle} />
           </SimpleGrid>
 
-          {/* Uses and Status */}
+          {/* Kegunaan dan Status */}
           <Heading size="md" color="whiteAlpha.800" mt={4}>Kegunaan dan Status</Heading>
           <Box>
             <Input
-              placeholder="Primary Uses (e.g., Coastal conservation, Fuelwood, Traditional medicine)"
+              placeholder="Kegunaan Utama (contoh: Konservasi pesisir, Kayu bakar, Obat tradisional)"
               value={kegunaanUtamaInput}
               onChange={(e) => setKegunaanUtamaInput(e.target.value)}
               {...inputStyle}
             />
-            <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setKegunaanUtamaInput, newFlora.kegunaanUtama, kegunaanUtamaInput, 6)} size="sm" colorScheme="teal">Add Primary Use</Button>
+            <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setKegunaanUtamaInput, newFlora.kegunaanUtama, kegunaanUtamaInput, 6)} size="sm" colorScheme="teal">Tambah Kegunaan Utama</Button>
             {newFlora.kegunaanUtama.length > 0 && (
-              <Text color="grey.900" fontSize="sm" mt={1}>Added: {newFlora.kegunaanUtama.join(', ')}</Text>
+              <Text color="grey.900" fontSize="sm" mt={1}>Ditambahkan: {newFlora.kegunaanUtama.join(', ')}</Text>
             )}
           </Box>
-          <Textarea placeholder="Description of Uses" name="deskripsiKegunaan" value={newFlora.deskripsiKegunaan} onChange={handleChange} {...inputStyle} />
+          <Textarea placeholder="Deskripsi Kegunaan" name="deskripsiKegunaan" value={newFlora.deskripsiKegunaan} onChange={handleChange} {...inputStyle} />
           <Box>
             <Input
-              placeholder="Bioactive Components (e.g., Tannins, Alkaloids)"
+              placeholder="Komponen Bioaktif (contoh: Tanin, Alkaloid)"
               value={komponenBioaktifInput}
               onChange={(e) => setKomponenBioaktifInput(e.target.value)}
               {...inputStyle}
             />
-            <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setKomponenBioaktifInput, newFlora.komponenBioaktif, komponenBioaktifInput, 5)} size="sm" colorScheme="teal">Add Bioactive Component</Button>
+            <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setKomponenBioaktifInput, newFlora.komponenBioaktif, komponenBioaktifInput, 5)} size="sm" colorScheme="teal">Tambah Komponen Bioaktif</Button>
             {newFlora.komponenBioaktif.length > 0 && (
-              <Text color="grey.900" fontSize="sm" mt={1}>Added: {newFlora.komponenBioaktif.join(', ')}</Text>
+              <Text color="grey.900" fontSize="sm" mt={1}>Ditambahkan: {newFlora.komponenBioaktif.join(', ')}</Text>
             )}
           </Box>
-          <Textarea placeholder="Potential Invasive Threat (e.g., Invasive in some regions because...)" name="potensiAncamanInvasif" value={newFlora.potensiAncamanInvasif} onChange={handleChange} {...inputStyle} />
-          <Input placeholder="Conservation Status (e.g., LC, EN, CR)" name="statusKonservasi" value={newFlora.statusKonservasi} onChange={handleChange} {...inputStyle} />
-          <Input placeholder="Source of Conservation Status Data" name="sumberDataStatusKonservasi" value={newFlora.sumberDataStatusKonservasi} onChange={handleChange} {...inputStyle} />
-          <Textarea placeholder="Ecological Value (e.g., Nitrogen fixation, Wildlife habitat)" name="nilaiEkologis" value={newFlora.nilaiEkologis} onChange={handleChange} {...inputStyle} />
-          <Textarea placeholder="Chemical Properties (e.g., Contains tannins, alkaloids)" name="sifatKimia" value={newFlora.sifatKimia} onChange={handleChange} {...inputStyle} />
-          <Textarea placeholder="Pest and Disease Vulnerability (e.g., Relatively resistant, Susceptible to...)" name="kerentananPenyakitHama" value={newFlora.kerentananPenyakitHama} onChange={handleChange} {...inputStyle} />
+          <Textarea placeholder="Potensi Ancaman Invasif (contoh: Invasif di beberapa daerah karena...)" name="potensiAncamanInvasif" value={newFlora.potensiAncamanInvasif} onChange={handleChange} {...inputStyle} />
+          <Input placeholder="Status Konservasi (contoh: LC, EN, CR)" name="statusKonservasi" value={newFlora.statusKonservasi} onChange={handleChange} {...inputStyle} />
+          <Input placeholder="Sumber Data Status Konservasi" name="sumberDataStatusKonservasi" value={newFlora.sumberDataStatusKonservasi} onChange={handleChange} {...inputStyle} />
+          <Textarea placeholder="Nilai Ekologis (contoh: Fiksasi nitrogen, Habitat satwa liar)" name="nilaiEkologis" value={newFlora.nilaiEkologis} onChange={handleChange} {...inputStyle} />
+          <Textarea placeholder="Sifat Kimia (contoh: Mengandung tanin, alkaloid)" name="sifatKimia" value={newFlora.sifatKimia} onChange={handleChange} {...inputStyle} />
+          <Textarea placeholder="Kerentanan Penyakit dan Hama (contoh: Relatif tahan, Rentan terhadap...)" name="kerentananPenyakitHama" value={newFlora.kerentananPenyakitHama} onChange={handleChange} {...inputStyle} />
 
-          {/* Metadata and References */}
+          {/* Metadata dan Referensi */}
           <Heading size="md" color="whiteAlpha.800" mt={4}>Metadata dan Referensi</Heading>
           <Box>
             <Input
-              placeholder="Scientific Reference (add one by one)"
+              placeholder="Referensi Ilmiah (tambahkan satu per satu)"
               value={referensiIlmiahInput}
               onChange={(e) => setReferensiIlmiahInput(e.target.value)}
               {...inputStyle}
             />
-            <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setReferensiIlmiahInput, newFlora.referensiIlmiah, referensiIlmiahInput, 5)} size="sm" colorScheme="teal">Add Reference</Button>
+            <Button mt={2} onClick={() => handleAddToArray(setNewFlora, setReferensiIlmiahInput, newFlora.referensiIlmiah, referensiIlmiahInput, 5)} size="sm" colorScheme="teal">Tambah Referensi</Button>
             {newFlora.referensiIlmiah.length > 0 && (
-              <Text color="grey.900" fontSize="sm" mt={1}>Added: {newFlora.referensiIlmiah.join(', ')}</Text>
+              <Text color="grey.900" fontSize="sm" mt={1}>Ditambahkan: {newFlora.referensiIlmiah.join(', ')}</Text>
             )}
           </Box>
           <Input
             type="date"
-            placeholder="Date of Research"
+            placeholder="Tanggal Penelitian"
             name="tanggalPenelitian"
             value={newFlora.tanggalPenelitian}
             onChange={handleChange}
             {...inputStyle}
           />
-          <Input placeholder="Researcher(s)" name="peneliti" value={newFlora.peneliti} onChange={handleChange} {...inputStyle} />
-          <Input placeholder="Observation Location" name="lokasiObservasi" value={newFlora.lokasiObservasi} onChange={handleChange} {...inputStyle} />
-          <Textarea placeholder="General Description" name="deskripsi" value={newFlora.deskripsi} onChange={handleChange} {...inputStyle} />
-          <Textarea placeholder="Additional Notes" name="catatanTambahan" value={newFlora.catatanTambahan} onChange={handleChange} {...inputStyle} />
+          <Input placeholder="Peneliti" name="peneliti" value={newFlora.peneliti} onChange={handleChange} {...inputStyle} />
+          <Input placeholder="Lokasi Observasi" name="lokasiObservasi" value={newFlora.lokasiObservasi} onChange={handleChange} {...inputStyle} />
+          <Textarea placeholder="Deskripsi Umum" name="deskripsi" value={newFlora.deskripsi} onChange={handleChange} {...inputStyle} />
+          <Textarea placeholder="Catatan Tambahan" name="catatanTambahan" value={newFlora.catatanTambahan} onChange={handleChange} {...inputStyle} />
 
 
-          {/* FILE INPUT IMAGE UTAMA */}
+          {/* Input file untuk gambar utama */}
           <Box>
-            <Text color="whiteAlpha.700" mb={2}>Main Image:</Text>
+            <Text color="whiteAlpha.700" mb={2}>Gambar Utama:</Text>
             <Input
               type="file"
               accept="image/*"
@@ -675,18 +674,18 @@ const CreateFloraPage = () => {
             />
           </Box>
 
-          {/* FILE INPUT GAMBAR LAINNYA */}
+          {/* Input file gambar lainnya */}
           <Box>
-            <Text color="whiteAlpha.700" mb={2}>Other Images (Optional):</Text>
+            <Text color="whiteAlpha.700" mb={2}>Gambar Lainnya (Opsional):</Text>
             <Input
               type="file"
               accept="image/*"
-              multiple // Allow multiple file selection
+              multiple 
               onChange={(e) => setUrlGambarLainFiles(Array.from(e.target.files))}
               {...inputStyle}
             />
             {urlGambarLainFiles.length > 0 && (
-              <Text color="grey.900" fontSize="sm" mt={1}>Files selected: {urlGambarLainFiles.map(f => f.name).join(', ')}</Text>
+              <Text color="grey.900" fontSize="sm" mt={1}>File terpilih: {urlGambarLainFiles.map(f => f.name).join(', ')}</Text>
             )}
           </Box>
 
@@ -699,9 +698,9 @@ const CreateFloraPage = () => {
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
             isLoading={isUploadingImage || createFlora.loading}
-            loadingText={isUploadingImage ? "Uploading Image(s)..." : "Adding Flora..."}
+            loadingText={isUploadingImage ? "Mengunggah Gambar..." : "Menambahkan Flora..."}
           >
-            Add Flora
+            Tambah Flora
           </MotionButton>
         </VStack>
       </MotionBox>

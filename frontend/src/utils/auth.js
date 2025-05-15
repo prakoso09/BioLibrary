@@ -13,7 +13,7 @@ export const setAuthToken = (token) => {
             localStorage.setItem('userRole', decodedToken.role);
             localStorage.setItem('userGmail', decodedToken.gmail);
             console.log('--- DEBUG: Decoded Token Payload ---');
-            console.log(decodedToken); // <--- Ini akan menampilkan SELURUH payload
+            console.log(decodedToken);
             console.log('Is "gmail" property present in decodedToken?', 'gmail' in decodedToken); // Cek apakah properti 'gmail' ada
             console.log('Value of decodedToken.gmail:', decodedToken.gmail); // Nilai dari properti 'gmail'
             console.log('Decoded Token:', decodedToken);

@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "../models/user.model.js"; // Import model User
-import mongoose from "mongoose"; // Import mongoose untuk validasi ObjectId
-import Flora from "../models/flora.model.js"; // Pastikan ini diimpor jika digunakan di file ini
+import User from "../models/user.model.js"; 
+import mongoose from "mongoose"; 
+import Flora from "../models/flora.model.js"; 
 
 export const registerUser = async (req, res) => {
   const { usn, password, gmail, name, institusi, role, nidn, nim, nooFpark, parkName } = req.body;
@@ -29,7 +29,7 @@ export const registerUser = async (req, res) => {
     return res.status(400).json({ message: "Password harus berisi minimal 8 karakter!" });
   }
 
-  console.log("Request Body: ", req.body); // Debugging: Print the request body
+  console.log("Request Body: ", req.body); // debugging: print  request body
 
   try {
     // Cek apakah email sudah ada di database
@@ -67,9 +67,9 @@ export const registerUser = async (req, res) => {
 
     await newUser.save();
 
-    // Generate token JWT (pastiin token ada)
+    // Generate token JWT 
     const token = jwt.sign(
-      { userId: newUser._id, role: newUser.role, gmail: newUser.gmail }, // Ini sudah benar
+      { userId: newUser._id, role: newUser.role, gmail: newUser.gmail },  
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -78,7 +78,7 @@ export const registerUser = async (req, res) => {
     // Mengirim response
     res.status(201).json({ message: "User berhasil terdaftar!", token });
   } catch (error) {
-    console.error("Error registrasi: ", error.message); // Cek error yang lebih jelas
+    console.error("Error registrasi: ", error.message); // Cek error message
     console.log(req.body); // Debugging: Print request body
     res.status(500).json({ message: "Terjadi kesalahan pada server." });
   }
@@ -93,6 +93,7 @@ export const loginUser = async (req, res) => {
   }
 
   try {
+
     // Cek apakah pengguna ada
     const user = await User.findOne({ gmail });
     if (!user) {
@@ -107,7 +108,7 @@ export const loginUser = async (req, res) => {
 
     // Generate token JWT
     const token = jwt.sign(
-      { userId: user._id, role: user.role, gmail: user.gmail }, // <--- TAMBAHKAN user.gmail DI SINI
+      { userId: user._id, role: user.role, gmail: user.gmail }, 
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );

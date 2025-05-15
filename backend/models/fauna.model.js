@@ -10,7 +10,7 @@ const faunaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    namaUmumLain: { // Tambahan untuk nama umum lain
+    namaUmumLain: { 
         type: String,
         trim: true
     },
@@ -18,7 +18,7 @@ const faunaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    klasifikasiIlmiah: { // Objek untuk klasifikasi ilmiah
+    klasifikasiIlmiah: { 
         kingdom: {
             type: String,
             trim: true,
@@ -40,7 +40,7 @@ const faunaSchema = new mongoose.Schema({
             type: String,
             trim: true
         },
-        subfamili: { // Tambahan untuk subfamili
+        subfamili: { 
             type: String,
             trim: true
         },
@@ -52,7 +52,7 @@ const faunaSchema = new mongoose.Schema({
             type: String,
             trim: true
         },
-        subspesies: [{ // Array untuk subspesies, jika ada
+        subspesies: [{
             nama: {
                 type: String,
                 trim: true
@@ -75,7 +75,7 @@ const faunaSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    ukuranTubuh: { // Objek untuk ukuran tubuh
+    ukuranTubuh: { 
         panjangTubuh: {
             type: String,
             trim: true
@@ -84,11 +84,11 @@ const faunaSchema = new mongoose.Schema({
             type: String,
             trim: true
         },
-        tinggiBahu: { // Tambahan untuk tinggi bahu jika relevan
+        tinggiBahu: {
             type: String,
             trim: true
         },
-        lebarSayap: { // Tambahan untuk lebar sayap jika relevan
+        lebarSayap: {
             type: String,
             trim: true
         },
@@ -99,7 +99,7 @@ const faunaSchema = new mongoose.Schema({
     },
     polaMakan: {
         type: String,
-        trim: true // Herbivora, Karnivora, Omnivora, Frugivora, Folivora
+        trim: true 
     },
     makananUtama: {
         type: String,
@@ -109,7 +109,7 @@ const faunaSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    reproduksi: { // Objek untuk reproduksi
+    reproduksi: { 
         kematanganSeksual: {
             type: String,
             trim: true
@@ -122,23 +122,23 @@ const faunaSchema = new mongoose.Schema({
             type: String,
             trim: true
         },
-        warnaBayi: { // Tambahan untuk warna bayi jika relevan
+        warnaBayi: { 
             type: String,
             trim: true
         },
-        perawatanAnak: { // Tambahan untuk perawatan anak jika relevan
+        perawatanAnak: { 
             type: String,
             trim: true
         },
-        tempatBertelur: { // Tambahan untuk tempat bertelur jika relevan
+        tempatBertelur: { 
             type: String,
             trim: true
         },
-        fekunditasTinggi: { // Tambahan untuk fekunditas tinggi jika relevan
+        fekunditasTinggi: { 
             type: String,
             trim: true
         },
-        perkembangan: { // Tambahan untuk perkembangan jika relevan
+        perkembangan: { 
             type: String,
             trim: true
         }
@@ -147,8 +147,8 @@ const faunaSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    perilaku: { // Objek untuk perilaku
-        aktivitas: { // Diurnal, Nokturnal, Krepuskular
+    perilaku: { 
+        aktivitas: { 
             type: String,
             trim: true
         },
@@ -160,20 +160,20 @@ const faunaSchema = new mongoose.Schema({
             type: String,
             trim: true
         },
-        perilakuLain: { // Tambahan untuk perilaku spesifik
+        perilakuLain: { 
             type: String,
             trim: true
         },
-        pertahanan: { // Tambahan untuk pertahanan jika relevan
+        pertahanan: { 
             type: String,
             trim: true
         },
-        peranEkologis: { // Tambahan untuk peran ekologis jika relevan
+        peranEkologis: { 
             type: String,
             trim: true
         }
     },
-    statusKepunahan: { // Objek untuk status kepunahan
+    statusKepunahan: { 
         statusIUCNGlobal: {
             type: String,
             trim: true
@@ -186,15 +186,15 @@ const faunaSchema = new mongoose.Schema({
             type: String,
             trim: true
         }],
-        alasan: { // Tambahan untuk alasan status IUCN
+        alasan: { 
             type: String,
             trim: true
         },
-        manajemenKonflik: { // Tambahan untuk manajemen konflik jika relevan
+        manajemenKonflik: { 
             type: String,
             trim: true
         },
-        invasiIntroduksi: { // Tambahan untuk invasi/introduksi jika relevan
+        invasiIntroduksi: { 
             type: String,
             trim: true
         }

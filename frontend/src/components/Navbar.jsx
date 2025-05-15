@@ -1,8 +1,7 @@
-// src/components/Navbar.jsx
 import {
     Container,
     Flex,
-    Button, // Pastikan Button diimpor
+    Button, 
     HStack,
     Text,
     useColorMode,
@@ -24,12 +23,12 @@ import { IoMoon } from 'react-icons/io5';
 import { LuSun } from 'react-icons/lu';
 import { motion } from 'framer-motion';
 import { useColorModeValue } from '@chakra-ui/react';
-import { FaLeaf, FaSignOutAlt } from 'react-icons/fa'; // <--- Import FaSignOutAlt jika ingin ikon logout yang sesuai
+import { FaLeaf, FaSignOutAlt } from 'react-icons/fa'; 
 import { isLoggedIn, logout } from '../utils/auth';
 
 const MotionLink = motion(Link);
-const MotionButton = motion(Button); // Ini sudah benar sebagai motion(Button)
-const MotionIconButton = motion(IconButton); // Ini juga sudah benar sebagai motion(IconButton)
+const MotionButton = motion(Button); 
+const MotionIconButton = motion(IconButton);
 
 const Navbar = () => {
     const location = useLocation();
@@ -58,7 +57,6 @@ const Navbar = () => {
     const textColor = useColorModeValue('gray.700', 'gray.200');
     const iconColor = useColorModeValue('gray.600', 'yellow.400');
     const buttonHoverBg = useColorModeValue('teal.100', 'teal.700');
-    // const linkHoverColor = useColorModeValue('teal.600', 'teal.400'); // Ini tidak digunakan, bisa dihapus
 
     return (
         <Container
@@ -182,28 +180,28 @@ const Navbar = () => {
 
                 <HStack spacing={4} alignItems={'center'}>
                     {userIsLoggedIn ? (
-                        // Bagian ini adalah untuk tombol "Logout"
+                        // Bagian ini buat tombol "Logout"
                         <MotionButton
                             onClick={onOpen}
-                            leftIcon={<FaSignOutAlt fontSize={23} color="white" />} // <--- Atur warna ikon di sini
+                            leftIcon={<FaSignOutAlt fontSize={23} color="white" />} 
                             whileHover={{ scale: 1.08 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-                            bg="red.500" // <--- Warna latar belakang merah
-                            color="white" // <--- Warna teks putih
+                            bg="red.500" 
+                            color="white" 
                             size={'sm'}
                             rounded={'md'}
-                            _hover={{ bg: "red.600", color: "white" }} // <--- Warna hover merah gelap
+                            _hover={{ bg: "red.600", color: "white" }} 
                         >
                             Logout
                         </MotionButton>
                     ) : (
-                        // Bagian ini adalah untuk tombol "Login"
+                        // Bagian buattombol "Login"
                         <MotionLink
                             to="/Login"
                             whileHover={{ scale: 1.08 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 15 }}
                         >
-                            <Button // Ini sudah benar menggunakan Button
+                            <Button 
                                 leftIcon={<PlusSquareIcon fontSize={23} color={accentColor} />}
                                 bg={'transparent'}
                                 color={textColor}
@@ -215,7 +213,7 @@ const Navbar = () => {
                             </Button>
                         </MotionLink>
                     )}
-                    <MotionIconButton // Ini menggunakan MotionIconButton (motion(IconButton))
+                    <MotionIconButton
                         onClick={toggleColorMode}
                         aria-label="Toggle theme"
                         icon={colorMode === 'light' ? <IoMoon size={23} color={iconColor} /> : <LuSun size={23} color={iconColor} />}

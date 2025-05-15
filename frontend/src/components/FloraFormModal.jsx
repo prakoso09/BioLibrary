@@ -18,102 +18,102 @@ import {
   Text,
   useToast,
   Spinner,
-  HStack, // Ditambahkan untuk tata letak horizontal
+  HStack, 
 } from '@chakra-ui/react';
 import axios from 'axios';
 
 const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
   const [formData, setFormData] = useState({
     namaIlmiah: '',
-    namaIlmiahLengkap: '', // Baru
+    namaIlmiahLengkap: '',
     namaLokal: '',
-    namaLokalLain: [], // Baru, array of strings
+    namaLokalLain: [], 
     namaKeluarga: '',
-    image: null, // Will hold File object or URL string
-    urlGambarLain: [], // Baru, array of strings
+    image: null,
+    urlGambarLain: [], 
     kingdom: 'Plantae',
     divisi: '',
     kelas: '',
     ordo: '',
     famili: '',
     genus: '',
-    spesies: '', // Baru
-    varietas: '', // Baru
+    spesies: '', 
+    varietas: '', 
     jenisTumbuhan: '',
-    tipePertumbuhan: '', // Baru
-    kategoriFungsional: [], // Baru, array of strings
+    tipePertumbuhan: '', 
+    kategoriFungsional: [], 
     
-    // Morfologi Vegetatif
-    tinggiMaksimal: '', // Baru
-    diameterBatangMaksimal: '', // Baru
-    deskripsiBatang: '', // Baru
-    deskripsiKulitBatang: '', // Baru
-    deskripsiCabang: '', // Baru
-    bentukTajuk: '', // Baru
-    jenisDaunSejati: '', // Nama field disesuaikan
-    deskripsiDaunSejati: '', // Baru
-    jenisRantingFotosintetik: '', // Baru
-    deskripsiRantingFotosintetik: '', // Baru
-    tipeSistemPerakaran: '', // Baru
-    deskripsiSistemPerakaran: '', // Baru
 
-    // Morfologi Generatif (nested objects)
+    tinggiMaksimal: '', 
+    diameterBatangMaksimal: '',
+    deskripsiBatang: '', 
+    deskripsiKulitBatang: '', 
+    deskripsiCabang: '',
+    bentukTajuk: '',
+    jenisDaunSejati: '', 
+    deskripsiDaunSejati: '',
+    jenisRantingFotosintetik: '', 
+    deskripsiRantingFotosintetik: '', 
+    tipeSistemPerakaran: '', 
+    deskripsiSistemPerakaran: '', 
+
+    // Morfologi generatif (nested objects)
     morfologiBunga: {
       tipeKelamin: '',
       deskripsiBungaJantan: '',
       deskripsiBungaBetina: '',
-      waktuBerbunga: '', // Baru
-      warnaBunga: '', // Baru
+      waktuBerbunga: '', 
+      warnaBunga: '', 
     },
     morfologiBuah: {
       tipeBuah: '',
       deskripsiBuah: '',
-      ukuranBuah: '', // Baru
-      warnaBuah: '', // Baru
-      waktuBerbuah: '', // Baru
+      ukuranBuah: '', 
+      warnaBuah: '', 
+      waktuBerbuah: '',
     },
     morfologiBiji: {
       deskripsiBiji: '',
-      ukuranBiji: '', // Baru
-      warnaBiji: '', // Baru
-      bentukBiji: '', // Baru
-      mekanismePenyebaranBiji: [], // Baru, array of strings
+      ukuranBiji: '', 
+      warnaBiji: '', 
+      bentukBiji: '', 
+      mekanismePenyebaranBiji: [], 
     },
-    metodeReproduksi: [], // Baru, array of strings
+    metodeReproduksi: [], 
 
     // Ekologi dan Kondisi Pertumbuhan
-    musimTumbuhOptimal: '', // Nama field disesuaikan
-    habitatAlami: '', // Nama field disesuaikan
-    kondisiTanahIdeal: '', // Baru
-    pHTanahOptimal: '', // Baru
-    drainaseTanahIdeal: '', // Baru
-    kondisiIklimOptimal: '', // Baru
-    toleransiKekeringan: '', // Baru
-    toleransiSalinitas: '', // Baru
-    toleransiAngin: '', // Baru
-    toleransiSuhu: '', // Baru
+    musimTumbuhOptimal: '', 
+    habitatAlami: '', 
+    kondisiTanahIdeal: '', 
+    pHTanahOptimal: '', 
+    drainaseTanahIdeal: '', 
+    kondisiIklimOptimal: '', 
+    toleransiKekeringan: '', 
+    toleransiSalinitas: '', 
+    toleransiAngin: '', 
+    toleransiSuhu: '', 
     sebaranGeografis: '',
-    ketinggianOptimal: '', // Baru
-    lajuPertumbuhan: '', // Baru
+    ketinggianOptimal: '', 
+    lajuPertumbuhan: '', 
 
     // Kegunaan dan Status Konservasi
-    kegunaanUtama: [], // Nama field disesuaikan
-    deskripsiKegunaan: '', // Baru
-    komponenBioaktif: [], // Baru, array of strings
-    potensiAncamanInvasif: '', // Baru
+    kegunaanUtama: [], 
+    deskripsiKegunaan: '', 
+    komponenBioaktif: [],
+    potensiAncamanInvasif: '', 
     statusKonservasi: '',
-    sumberDataStatusKonservasi: '', // Baru
-    nilaiEkologis: '', // Baru
-    sifatKimia: '', // Baru
-    kerentananPenyakitHama: '', // Baru
+    sumberDataStatusKonservasi: '', 
+    nilaiEkologis: '', 
+    sifatKimia: '',
+    kerentananPenyakitHama: '',
 
     // Metadata dan Referensi
-    referensiIlmiah: [], // Baru, array of strings
-    tanggalPenelitian: null, // Baru, Date type
-    peneliti: '', // Baru
-    lokasiObservasi: '', // Baru
+    referensiIlmiah: [], 
+    tanggalPenelitian: null, 
+    peneliti: '', 
+    lokasiObservasi: '', 
     deskripsi: '',
-    catatanTambahan: '', // Baru
+    catatanTambahan: '', 
     createdBy: '',
   });
 
@@ -147,7 +147,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
         metodeReproduksi: Array.isArray(flora.metodeReproduksi) ? flora.metodeReproduksi.join('\n') : '',
         referensiIlmiah: Array.isArray(flora.referensiIlmiah) ? flora.referensiIlmiah.join('\n') : '',
         
-        // Pastikan objek bersarang ada sebelum mengakses propertinya
+        // Pastikan objek bersarang sebelum mengakses propertinya
         morfologiBunga: {
             tipeKelamin: flora.morfologiBunga?.tipeKelamin || '',
             deskripsiBungaJantan: flora.morfologiBunga?.deskripsiBungaJantan || '',
@@ -178,7 +178,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
         setImagePreviewUrl(null);
       }
     } else {
-      // Reset form data and preview for 'Add' mode or when modal closes
+      // Reset form data and preview
       setFormData({
         namaIlmiah: '',
         namaIlmiahLengkap: '',
@@ -276,7 +276,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
     }
 
     if (fileInputRef.current) {
-      fileInputRef.current.value = ''; // Clear the selected file from input
+      fileInputRef.current.value = ''; // Clear file yang diselect sekarang?
     }
 
     return () => {
@@ -290,7 +290,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
 
-    // Handle nested objects for morphology
+    // Handle nested objects 
     if (name.startsWith('morfologiBunga.') || name.startsWith('morfologiBuah.') || name.startsWith('morfologiBiji.')) {
       const [parent, child] = name.split('.');
       setFormData((prev) => ({
@@ -304,7 +304,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
       const file = files[0];
       setFormData((prev) => ({
         ...prev,
-        [name]: file, // Ini akan menyimpan objek File
+        [name]: file, 
       }));
       if (imagePreviewUrl && imagePreviewUrl.startsWith('blob:')) {
         URL.revokeObjectURL(imagePreviewUrl);
@@ -382,11 +382,10 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
         ...formData.morfologiBiji,
         mekanismePenyebaranBiji: formData.morfologiBiji.mekanismePenyebaranBiji.split('\n').map(line => line.trim()).filter(Boolean),
       },
-      // Pastikan tanggal dikonversi jika perlu
       tanggalPenelitian: formData.tanggalPenelitian ? new Date(formData.tanggalPenelitian) : null,
     };
 
-    // Clean up empty string values from nested objects if they are not required
+    // Bersihin empty string kalo ga diisi?
     if (dataToSubmit.morfologiBunga.deskripsiBungaJantan === '') dataToSubmit.morfologiBunga.deskripsiBungaJantan = undefined;
     if (dataToSubmit.morfologiBunga.deskripsiBungaBetina === '') dataToSubmit.morfologiBunga.deskripsiBungaBetina = undefined;
     // Lakukan ini untuk semua field opsional di nested object
@@ -1039,7 +1038,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
               />
             </FormControl>
             
-            {/* Deskripsi (tetap ada, tapi posisinya bisa disesuaikan) */}
+            {/* Deskripsi*/}
             <FormControl id="deskripsi" isRequired>
               <FormLabel>Deskripsi Umum</FormLabel>
               <Textarea
@@ -1064,7 +1063,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
               <Input
                 type="date"
                 name="tanggalPenelitian"
-                value={formData.tanggalPenelitian || ''} // Pastikan formatnya 'YYYY-MM-DD'
+                value={formData.tanggalPenelitian || ''}
                 onChange={handleChange}
               />
             </FormControl>
@@ -1098,7 +1097,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
                 name="createdBy"
                 value={formData.createdBy}
                 onChange={handleChange}
-                disabled // Biasanya ini diisi otomatis
+                disabled 
               />
             </FormControl>
 
@@ -1107,7 +1106,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
 
         <ModalFooter>
           <Button variant="ghost" onClick={() => {
-            // Reset form data to initial state when cancelled
+            // Reset form data ke nilai awal
             if (initialFloraState.current) {
                 setFormData({
                     ...initialFloraState.current,
@@ -1148,7 +1147,7 @@ const FloraFormModal = ({ isOpen, onClose, flora, onSubmit, isEdit }) => {
                     setImagePreviewUrl(null);
                 }
             } else {
-                // Default empty state for new flora
+                // Default empty state untuk flora baru
                 setFormData({
                     namaIlmiah: '',
                     namaIlmiahLengkap: '',

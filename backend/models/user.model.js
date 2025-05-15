@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        match: /.+\@gmail\.com$/  // memastikan format gmail
+        match: /.+\@gmail\.com$/ 
     },
     name: {
         type: String,

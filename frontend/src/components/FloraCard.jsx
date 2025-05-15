@@ -4,7 +4,7 @@ import {
     Image,
     useColorModeValue,
     HStack,
-    IconButton, // <-- Hapus ini jika tidak ada IconButton lain yang digunakan
+    IconButton,
     VStack,
     Text,
     Divider,
@@ -16,10 +16,9 @@ import {
     ModalBody,
     ModalFooter,
     ModalOverlay,
-    Button, // Pastikan Button tetap ada
+    Button, 
     Input
 } from '@chakra-ui/react';
-// import { EditIcon, DeleteIcon } from '@chakra-ui/icons'; // <-- Hapus import icon ini
 import { motion } from 'framer-motion';
 import { useFloraStore } from '../store/flora';
 import { useToast } from '@chakra-ui/react';
@@ -112,23 +111,20 @@ const FloraCard = ({ flora }) => {
                 animate={{ opacity: 1, y: 0 }}
                 display="flex"
                 flexDirection="column"
-                // minH="400px" // Tetapkan minH untuk mencegah card terlalu pendek
             >
-                <Link to={`/flora/${flora._id}`}> {/* Bungkus Image dengan Link */}
+                <Link to={`/flora/${flora._id}`}> 
                     <Image
                         src={flora.image && flora.image.startsWith('http') ? flora.image : null}
                         alt={flora.namaLokal}
-                        h="230px" // Sesuaikan tinggi gambar seperti saran sebelumnya
+                        h="230px" 
                         w="full"
                         objectFit="cover"
                         transition="0.3s"
-                        //aspectRatio={16 / 9} // Baru di Chakra UI v2+ — jaga rasio tanpa tentukan tinggi
                         _hover={{ filter: 'brightness(1.1)' }}
-                        cursor="pointer" // Tambahkan cursor pointer
+                        cursor="pointer" 
                     />
                 </Link>
 
-                {/* Mengurangi spacing antar teks */}
                 <VStack spacing={1} px={4} py={2} textAlign="center"> 
                     <Text
                     fontSize="xl"
@@ -137,7 +133,7 @@ const FloraCard = ({ flora }) => {
                     overflow="hidden"
                     textOverflow="ellipsis"
                     whiteSpace="nowrap"
-                    maxWidth="370px" // Atur lebar maksimum sesuai kebutuhan
+                    maxWidth="370px" 
                     >
                     {flora.namaLokal}
                     </Text>
@@ -148,7 +144,7 @@ const FloraCard = ({ flora }) => {
                     overflow="hidden"
                     textOverflow="ellipsis"
                     whiteSpace="nowrap"
-                    maxWidth="370px" // Atur lebar maksimum sesuai kebutuhan
+                    maxWidth="370px"
                     >
                     {flora.namaIlmiah}
                     </Text>
@@ -157,52 +153,21 @@ const FloraCard = ({ flora }) => {
 
                 <Divider borderColor="gray.600" opacity={0.3} mx={4} />
 
-
-                {/* Bagian ini yang akan diubah dari IconButton menjadi Button "Read More" */}
                 <HStack px={4} py={2} spacing={3} justify="center">
                     <Link to={`/flora/${flora._id}`}> {/* Bungkus Button dengan Link */}
                         <Button
                             colorScheme="blue"
-                            size="md" // Anda bisa menggunakan 'sm', 'md', atau 'lg'
+                            size="md" 
                             aria-label="Read More"
-                            // Jika Anda ingin tombol mengambil lebar penuh dari HStack, tambahkan w="full"
-                            // w="full"
                         >
                             Read More
                         </Button>
                     </Link>
-                    {/* Jika Anda masih ingin tombol Edit/Delete untuk admin, Anda bisa menambahkannya di sini
-                       dan mengkondisikannya (misalnya, tampilkan hanya jika user adalah admin)
-                       Contoh:
-                       {isAdmin && (
-                           <>
-                               <IconButton
-                                   icon={<EditIcon />}
-                                   onClick={() => {
-                                       setUpdatedFlora(initialFlora);
-                                       onUpdateOpen();
-                                   }}
-                                   variant="solid"
-                                   size="sm"
-                                   colorScheme="blue"
-                                   aria-label="Edit"
-                               />
-                               <IconButton
-                                   icon={<DeleteIcon />}
-                                   onClick={onDeleteOpen}
-                                   variant="solid"
-                                   size="sm"
-                                   colorScheme="red"
-                                   aria-label="Delete"
-                               />
-                           </>
-                       )}
-                    */}
                 </HStack>
             </MotionBox>
 
 
-            {/* Update Modal (tetap ada jika Anda masih butuh fungsionalitas update/delete di tempat lain) */}
+            {/* Update Modal yg udah ga dibuthin sebenernya */}
             <Modal isOpen={isUpdateOpen} onClose={onUpdateClose} isCentered>
                 <ModalOverlay />
                 <ModalContent>
@@ -246,7 +211,7 @@ const FloraCard = ({ flora }) => {
             </Modal>
 
 
-            {/* Delete Confirmation Modal (tetap ada jika Anda masih butuh fungsionalitas update/delete di tempat lain) */}
+            {/* Delete Confirmation Modal yg udah gabutuh juga sebenernya */}
             <Modal isOpen={isDeleteOpen} onClose={onDeleteClose} isCentered>
                 <ModalOverlay />
                 <ModalContent

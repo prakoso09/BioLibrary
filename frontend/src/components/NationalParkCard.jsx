@@ -1,4 +1,3 @@
-// components/NationalParkCard.jsx
 import React from 'react';
 import {
     Box,
@@ -8,28 +7,15 @@ import {
     VStack,
     Text,
     Divider,
-    // useDisclosure, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalOverlay, Input, // Hapus import ini jika tidak ada fungsionalitas update/delete di card
     Button,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-// import { useNationalParkStore } from '../store/nationalPark'; // Hapus import ini jika tidak ada fungsionalitas update/delete di card
-// import { useToast } from '@chakra-ui/react'; // Hapus import ini jika tidak ada fungsionalitas update/delete di card
-// import { useState, useEffect } from 'react'; // Hapus import ini jika tidak ada fungsionalitas update/delete di card
 import { Link } from 'react-router-dom';
 
 const MotionBox = motion(Box);
 
 const NationalParkCard = ({ nationalPark }) => {
-    // Hapus state dan fungsi update/delete jika tidak diperlukan di card
-    // const [updatedNationalPark, setUpdatedNationalPark] = useState(nationalPark);
-    // const initialNationalPark = nationalPark;
-    // const { deleteNationalPark, updateNationalPark } = useNationalParkStore();
-    // const toast = useToast();
-    // const { isOpen: isUpdateOpen, onOpen: onUpdateOpen, onClose: onUpdateClose } = useDisclosure();
-    // const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
 
-    // const handleDeleteNationalPark = async (id) => { ... };
-    // const handleUpdateNationalPark = async (id, updatedData) => { ... };
 
     const borderGradient = useColorModeValue(
         'linear(to-r, teal.300, blue.700)',
@@ -61,7 +47,7 @@ const NationalParkCard = ({ nationalPark }) => {
                 <Link to={`/NationalPark/${nationalPark._id}`}>
                     <Image
                         src={nationalPark.image && nationalPark.image.startsWith('http') ? nationalPark.image : 'https://via.placeholder.com/400x230?text=No+Image'}
-                        alt={nationalPark.namaResmi} // Menggunakan namaResmi
+                        alt={nationalPark.namaResmi}
                         h="230px"
                         w="full"
                         objectFit="cover"
@@ -81,7 +67,7 @@ const NationalParkCard = ({ nationalPark }) => {
                         whiteSpace="nowrap"
                         maxWidth="370px"
                     >
-                        {nationalPark.namaResmi} {/* Menggunakan namaResmi */}
+                        {nationalPark.namaResmi} 
                     </Text>
                     <Text
                         fontSize="md"
@@ -92,9 +78,8 @@ const NationalParkCard = ({ nationalPark }) => {
                         whiteSpace="nowrap"
                         maxWidth="370px"
                     >
-                        {nationalPark.lokasi} {/* Menggunakan lokasi */}
+                        {nationalPark.lokasi} 
                     </Text>
-                    {/* Anda bisa menambahkan properti singkat lainnya di sini jika diperlukan, contoh luas */}
                     <Text
                         fontSize="sm"
                         noOfLines={1}
@@ -121,9 +106,6 @@ const NationalParkCard = ({ nationalPark }) => {
                 </HStack>
             </MotionBox>
 
-            {/* Modal update/delete dihapus dari card karena biasanya dilakukan di halaman detail atau admin dashboard */}
-            {/* <Modal isOpen={isUpdateOpen} onClose={onUpdateClose} isCentered>...</Modal> */}
-            {/* <Modal isOpen={isDeleteOpen} onClose={onDeleteClose} isCentered>...</Modal> */}
         </Box>
     );
 };

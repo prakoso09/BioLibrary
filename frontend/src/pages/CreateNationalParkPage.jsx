@@ -1,4 +1,3 @@
-// pages/CreateNationalParkPage.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import {
     Container,
@@ -24,13 +23,12 @@ import {
     FormControl,
     FormLabel,
 } from '@chakra-ui/react';
-import { useNationalParkStore } from '../store/nationalPark'; // Pastikan Anda mengimpor store yang benar
+import { useNationalParkStore } from '../store/nationalPark'; 
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
-// Menggunakan motion(Component) adalah cara yang benar untuk membungkus komponen Chakra UI
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);
 
@@ -38,8 +36,8 @@ const CreateNationalParkPage = () => {
     const [formData, setFormData] = useState({
         namaResmi: '',
         lokasi: '',
-        wilayahAdministratif: '', // Akan di-parse dari string
-        image: null, // Akan di-parse dari string
+        wilayahAdministratif: '', 
+        image: null, 
         koordinatGeografis: { lintang: '', bujur: '' },
         luas: { value: '', unit: 'Hektar', referensi: '' },
         ketinggian: { min: '', max: '', unit: 'mdpl' },
@@ -51,37 +49,35 @@ const CreateNationalParkPage = () => {
             suhuRataRata: { kakiGunung: '', puncak: '' },
             kelembabanUdaraRataRata: { value: '', unit: '%' },
         },
-        ekosistemHabitat: '', // Akan di-parse dari string
+        ekosistemHabitat: '', 
         flora: {
             jumlahJenis: '',
-            pohonDominan: '', // Akan di-parse dari string
-            tumbuhanBawahSemak: '', // Akan di-parse dari string
-            tumbuhanPionir: '', // Akan di-parse dari string
-            tumbuhanKhasEndemik: '', // Akan di-parse dari string
+            pohonDominan: '', 
+            tumbuhanBawahSemak: '', 
+            tumbuhanPionir: '', 
+            tumbuhanKhasEndemik: '', 
         },
         fauna: {
             jumlahJenis: { burung: '', mamalia: '', reptil: '', amfibi: '' },
-            mamalia: '', // Akan di-parse dari string
-            burung: '', // Akan di-parse dari string
+            mamalia: '', 
+            burung: '', 
         },
-        sejarahSingkat: '', // Akan di-parse dari string
-        aktivitasPengelolaan: '', // Akan di-parse dari string
-        fasilitasPendukung: '', // Akan di-parse dari string
-        ancamanKonservasi: '', // Akan di-parse dari string
-        upayaKonservasi: '', // Akan di-parse dari string
+        sejarahSingkat: '', 
+        aktivitasPengelolaan: '', 
+        fasilitasPendukung: '', 
+        ancamanKonservasi: '', 
+        upayaKonservasi: '', 
     });
-
     const fileInputRef = useRef(null);
     const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
     const [isUploadingImage, setIsUploadingImage] = useState(false);
     const toast = useToast();
     const navigate = useNavigate();
-    const { createNationalPark } = useNationalParkStore(); // Action dari store
+    const { createNationalPark } = useNationalParkStore();
 
     const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
     const CLOUDINARY_UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
-    // Style definitions
     const inputStyle = {
         borderRadius: 'xl',
         bg: useColorModeValue('whiteAlpha.300', 'whiteAlpha.200'),
@@ -286,10 +282,10 @@ const CreateNationalParkPage = () => {
             setIsUploadingImage(false);
         }
 
-        // Helper function to parse multiline strings into arrays
+        // Helper function buat parse multipleline string jadi array
         const parseMultilineString = (str) => str.split('\n').map(line => line.trim()).filter(Boolean);
 
-        // Helper function to parse "Nama: Deskripsi (Detail)" format for array of objects
+        // Helper function buat parse "Nama: Deskripsi (Detail)" format ke array of objects
         const parseComplexArray = (str, type) => {
             const lines = parseMultilineString(str);
             return lines.map(line => {
@@ -447,7 +443,7 @@ const CreateNationalParkPage = () => {
                 if (fileInputRef.current) {
                     fileInputRef.current.value = '';
                 }
-                navigate('/NationalPark'); // Arahkan ke halaman daftar taman nasional
+                navigate('/NationalPark');
             }
         } catch (error) {
             toast({
@@ -462,7 +458,7 @@ const CreateNationalParkPage = () => {
     };
 
     const handleGoBack = () => {
-        navigate('/NationalPark'); // Arahkan ke halaman daftar taman nasional
+        navigate('/NationalPark'); 
     };
 
     return (

@@ -1,4 +1,3 @@
-// pages/login.jsx
 import {
   Box,
   Button,
@@ -16,7 +15,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { setAuthToken } from '../utils/auth'; // <--- IMPORT setAuthToken
+import { setAuthToken } from '../utils/auth';
 
 const Login = () => {
   const { colorMode } = useColorMode();
@@ -41,10 +40,8 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:5000/api/data/login", form);
       
-      // GANTI BARIS INI:
-      // localStorage.setItem("token", response.data.token);
-      // DENGAN INI:
-      setAuthToken(response.data.token); // <--- PANGGIL FUNGSI DARI AUTH.JS
+
+      setAuthToken(response.data.token); 
 
       toast({
         title: "Login Berhasil!",
@@ -54,11 +51,11 @@ const Login = () => {
         isClosable: true,
       });
       
-      console.log("Login successful. Navigating to /..."); // Tambahkan log ini
-      navigate("/"); // Ini akan menyebabkan perubahan lokasi dan memicu Navbar useEffect
+      console.log("Login successful. Navigating to /..."); // Debugging
+      navigate("/"); 
 
     } catch (error) {
-      console.error("Login error:", error.response?.data?.message || error.message); // Logging error lebih detail
+      console.error("Login error:", error.response?.data?.message || error.message); 
       toast({
         title: "Login Gagal",
         description: error.response?.data?.message || "Terjadi kesalahan",
@@ -120,10 +117,10 @@ const Login = () => {
           </Text>
 
           <FormControl id="gmail" isRequired>
-            <FormLabel color={useColorModeValue("gray.700", "gray.200")}>Email</FormLabel> {/* Ganti 'gmail' jadi 'Email' di label */}
+            <FormLabel color={useColorModeValue("gray.700", "gray.200")}>Email</FormLabel>
             <Input
               name="gmail"
-              type="email" // Ganti 'gmail' jadi 'email' untuk type
+              type="email" 
               value={form.gmail}
               onChange={handleChange}
               placeholder="alamat_email@contoh.com"

@@ -18,7 +18,7 @@ import {
     Text,
     useToast,
     Spinner,
-    Select, // Tambahkan Select untuk dropdown
+    Select, 
 } from '@chakra-ui/react';
 import axios from 'axios';
 
@@ -27,7 +27,7 @@ const FaunaFormModal = ({ isOpen, onClose, fauna, onSubmit, isEdit }) => {
         namaIlmiah: '',
         namaLokal: '',
         namaUmumLain: '',
-        image: null, // Will hold File object or URL string
+        image: null, 
         klasifikasiIlmiah: {
             kingdom: 'Animalia',
             filum: '',
@@ -158,7 +158,7 @@ const FaunaFormModal = ({ isOpen, onClose, fauna, onSubmit, isEdit }) => {
                 setImagePreviewUrl(null);
             }
         } else {
-            // Reset form data and preview for 'Add' mode or when modal closes
+            // buat preview???
             setFormData({
                 namaIlmiah: '',
                 namaLokal: '',
@@ -221,7 +221,7 @@ const FaunaFormModal = ({ isOpen, onClose, fauna, onSubmit, isEdit }) => {
         }
 
         if (fileInputRef.current) {
-            fileInputRef.current.value = ''; // Clear the selected file from input
+            fileInputRef.current.value = ''; 
         }
 
         return () => {
@@ -238,7 +238,7 @@ const FaunaFormModal = ({ isOpen, onClose, fauna, onSubmit, isEdit }) => {
             const file = files[0];
             setFormData((prev) => ({
                 ...prev,
-                [name]: file, // Ini akan menyimpan objek File
+                [name]: file,
             }));
             if (imagePreviewUrl && imagePreviewUrl.startsWith('blob:')) {
                 URL.revokeObjectURL(imagePreviewUrl);
@@ -354,7 +354,7 @@ const FaunaFormModal = ({ isOpen, onClose, fauna, onSubmit, isEdit }) => {
                 ...formData.klasifikasiIlmiah,
                 subspesies: Array.isArray(formData.klasifikasiIlmiah.subspesies)
                     ? formData.klasifikasiIlmiah.subspesies.map(s => ({ nama: s.nama.trim(), deskripsi: s.deskripsi.trim() })).filter(s => s.nama)
-                    : [], // Ensure it's an array of objects for subspesies
+                    : [],
             },
             statusKepunahan: {
                 ...formData.statusKepunahan,
@@ -379,7 +379,7 @@ const FaunaFormModal = ({ isOpen, onClose, fauna, onSubmit, isEdit }) => {
     };
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} size="xl"> {/* Adjust size as needed */}
+        <Modal isOpen={isOpen} onClose={onClose} size="xl"> 
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>{isEdit ? 'Edit Fauna' : 'Add Fauna'}</ModalHeader>
@@ -518,8 +518,7 @@ const FaunaFormModal = ({ isOpen, onClose, fauna, onSubmit, isEdit }) => {
                                 onChange={handleChange}
                             />
                         </FormControl>
-                        {/* Subspesies (simplified - can be made more robust) */}
-                        {/* Note: For multiple nested arrays like `subspesies`, you'd typically use a more complex component or handle it as a single textarea for simplicity. For consistency, using a textarea here as per FloraFormModal's "kegunaan" */}
+                        {/* Subspesies  */}
                         <FormControl id="subspesies">
                             <FormLabel>Subspesies (Nama:Deskripsi, pisahkan dengan baris baru)</FormLabel>
                             <Textarea

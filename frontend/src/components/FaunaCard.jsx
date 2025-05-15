@@ -19,7 +19,7 @@ import {
     Input
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { useFaunaStore } from '../store/fauna'; // Import useFaunaStore
+import { useFaunaStore } from '../store/fauna'; 
 import { useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -28,17 +28,17 @@ import { useEffect } from 'react';
 const MotionBox = motion(Box);
 const FaunaCard = ({ fauna }) => {
     const [updatedFauna, setUpdatedFauna] = useState(fauna); // Inisialisasi dengan nilai awal
-    const initialFauna = fauna; // Simpan nilai awal fauna
+    const initialFauna = fauna; // Simpan nilai awal fauna, nilai awal digunakan ketika user cancel / gajadi update, tapi sebenernya gaperlu di page ini deh?
 
 
-    const { deleteFauna, updateFauna } = useFaunaStore(); // Gunakan useFaunaStore
+    const { deleteFauna, updateFauna } = useFaunaStore(); 
     const toast = useToast();
     const { isOpen: isUpdateOpen, onOpen: onUpdateOpen, onClose: onUpdateClose } = useDisclosure();
     const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
 
 
     const handleDeleteFauna = async (id) => {
-        const { success, message } = await deleteFauna(id); // Gunakan deleteFauna
+        const { success, message } = await deleteFauna(id); 
         if (!success) {
             toast({
                 title: 'Error',
@@ -62,7 +62,7 @@ const FaunaCard = ({ fauna }) => {
 
 
     const handleUpdateFauna = async (id, updatedFauna) => {
-        const { success, message } = await updateFauna(id, updatedFauna); // Gunakan updateFauna
+        const { success, message } = await updateFauna(id, updatedFauna);
         if (!success) {
             toast({
                 title: 'Error',
@@ -110,23 +110,21 @@ const FaunaCard = ({ fauna }) => {
                 animate={{ opacity: 1, y: 0 }}
                 display="flex"
                 flexDirection="column"
-                // minH="400px" // Tetapkan minH untuk mencegah card terlalu pendek
             >
-                <Link to={`/fauna/${fauna._id}`}> {/* Bungkus Image dengan Link */}
+                <Link to={`/fauna/${fauna._id}`}> 
                     <Image
                         src={fauna.image && fauna.image.startsWith('http') ? fauna.image : null}
                         alt={fauna.namaLokal}
-                        h="230px" // Sesuaikan tinggi gambar seperti saran sebelumnya
+                        h="230px" 
                         w="full"
                         objectFit="cover"
                         transition="0.3s"
-                        //aspectRatio={16 / 9} // Baru di Chakra UI v2+ — jaga rasio tanpa tentukan tinggi
                         _hover={{ filter: 'brightness(1.1)' }}
-                        cursor="pointer" // Tambahkan cursor pointer
+                        cursor="pointer"
                     />
                 </Link>
 
-                {/* Mengurangi spacing antar teks */}
+                
                 <VStack spacing={1} px={4} py={2} textAlign="center"> 
                     <Text
                     fontSize="xl"
@@ -135,7 +133,7 @@ const FaunaCard = ({ fauna }) => {
                     overflow="hidden"
                     textOverflow="ellipsis"
                     whiteSpace="nowrap"
-                    maxWidth="370px" // Atur lebar maksimum sesuai kebutuhan
+                    maxWidth="370px"
                     >
                     {fauna.namaLokal}
                     </Text>
@@ -146,7 +144,7 @@ const FaunaCard = ({ fauna }) => {
                     overflow="hidden"
                     textOverflow="ellipsis"
                     whiteSpace="nowrap"
-                    maxWidth="370px" // Atur lebar maksimum sesuai kebutuhan
+                    maxWidth="370px" 
                     >
                     {fauna.namaIlmiah}
                     </Text>
@@ -156,51 +154,21 @@ const FaunaCard = ({ fauna }) => {
                 <Divider borderColor="gray.600" opacity={0.3} mx={4} />
 
 
-                {/* Bagian ini yang akan diubah dari IconButton menjadi Button "Read More" */}
                 <HStack px={4} py={2} spacing={3} justify="center">
-                    <Link to={`/fauna/${fauna._id}`}> {/* Bungkus Button dengan Link */}
+                    <Link to={`/fauna/${fauna._id}`}> 
                         <Button
                             colorScheme="blue"
-                            size="md" // Anda bisa menggunakan 'sm', 'md', atau 'lg'
+                            size="md"
                             aria-label="Read More"
-                            // Jika Anda ingin tombol mengambil lebar penuh dari HStack, tambahkan w="full"
-                            // w="full"
                         >
                             Read More
                         </Button>
                     </Link>
-                    {/* Jika Anda masih ingin tombol Edit/Delete untuk admin, Anda bisa menambahkannya di sini
-                        dan mengkondisikannya (misalnya, tampilkan hanya jika user adalah admin)
-                        Contoh:
-                        {isAdmin && (
-                            <>
-                                <IconButton
-                                    icon={<EditIcon />}
-                                    onClick={() => {
-                                        setUpdatedFauna(initialFauna);
-                                        onUpdateOpen();
-                                    }}
-                                    variant="solid"
-                                    size="sm"
-                                    colorScheme="blue"
-                                    aria-label="Edit"
-                                />
-                                <IconButton
-                                    icon={<DeleteIcon />}
-                                    onClick={onDeleteOpen}
-                                    variant="solid"
-                                    size="sm"
-                                    colorScheme="red"
-                                    aria-label="Delete"
-                                />
-                            </>
-                        )}
-                    */}
                 </HStack>
             </MotionBox>
 
 
-            {/* Update Modal (tetap ada jika Anda masih butuh fungsionalitas update/delete di tempat lain) */}
+            {/* Update modal dan delete modal udh ga butuh sebenenrnya, tapi simpen aja disini incase mau dirubah nanti */}
             <Modal isOpen={isUpdateOpen} onClose={onUpdateClose} isCentered>
                 <ModalOverlay />
                 <ModalContent>
@@ -244,7 +212,7 @@ const FaunaCard = ({ fauna }) => {
             </Modal>
 
 
-            {/* Delete Confirmation Modal (tetap ada jika Anda masih butuh fungsionalitas update/delete di tempat lain) */}
+            {/* Delete Confirmation Modal , juga sebenernya udh ga butuh tapi gapapa simpen aja disini*/}
             <Modal isOpen={isDeleteOpen} onClose={onDeleteClose} isCentered>
                 <ModalOverlay />
                 <ModalContent

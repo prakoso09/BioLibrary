@@ -1,4 +1,3 @@
-// pages/NationalParkPage.jsx
 import {
     VStack,
     Container,
@@ -16,22 +15,22 @@ import {
     AlertDialogBody,
     AlertDialogFooter,
     useDisclosure,
-    Spinner, // Tambahkan Spinner untuk loading state
+    Spinner,
 } from '@chakra-ui/react';
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useNationalParkStore } from '../store/nationalPark.js'; // Pastikan ini diimpor
-import NationalParkCard from '../components/NationalParkCard.jsx'; // Asumsi Anda punya komponen Card
+import { useNationalParkStore } from '../store/nationalPark.js';
+import NationalParkCard from '../components/NationalParkCard.jsx'; 
 import { PlusSquareIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
-import { isLoggedIn } from '../utils/auth'; // Pastikan ini diimpor
+import { isLoggedIn } from '../utils/auth'; 
 
 const MotionButton = motion(Button);
 
 const NationalParkPage = () => {
     const accentColor = useColorModeValue('teal.600', 'teal.300');
     const textColor = useColorModeValue('gray.800', 'gray.200');
-    const cardBgColor = useColorModeValue('rgb(110, 220, 224)', 'gray.800'); // Sesuaikan jika ingin warna lain
+    const cardBgColor = useColorModeValue('rgb(110, 220, 224)', 'gray.800');
     const borderColor = useColorModeValue('gray.200', 'gray.600');
     const hoverColor = useColorModeValue('gray.50', 'gray.600');
     const navigate = useNavigate();
@@ -54,7 +53,7 @@ const NationalParkPage = () => {
         if (!userIsLoggedIn) {
             onOpen();
         } else {
-            navigate('/CreateNationalPark'); // Sesuaikan rute untuk membuat Taman Nasional
+            navigate('/CreateNationalPark'); 
         }
     };
 
@@ -69,7 +68,7 @@ const NationalParkPage = () => {
         return path.split('.').reduce((acc, part) => acc && acc[part], obj);
     };
 
-    // Filter logic for national parks
+    // Filter logic untul national park
     const filteredNationalParks = sortedNationalParks.filter((item) => {
         const value = getNestedValue(item, searchCategory);
         if (Array.isArray(value)) {
@@ -93,7 +92,7 @@ const NationalParkPage = () => {
                     National Parks Library ⛰️
                 </Text>
 
-                {/* Filter Section */}
+                {/* Filter  */}
                 <VStack spacing={4} w="full" maxW="500px" margin="auto" p={6}
                     bg={cardBgColor} borderRadius="xl" boxShadow="sm"
                     borderWidth="1px" borderColor={borderColor}>
@@ -216,13 +215,12 @@ const NationalParkPage = () => {
                 ) : (
                     <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6} w="full">
                         {filteredNationalParks.map((item) => (
-                            // Pastikan NationalParkCard menerima prop yang sesuai
                             <NationalParkCard key={item._id} nationalPark={item} />
                         ))}
                     </SimpleGrid>
                 )}
 
-                {filteredNationalParks.length === 0 && !loadingNationalParks && ( // Tampilkan pesan jika tidak ada hasil dan tidak sedang loading
+                {filteredNationalParks.length === 0 && !loadingNationalParks && ( 
                     <VStack spacing={4} p={8} bg={cardBgColor} borderRadius="xl"
                         borderWidth="1px" borderColor={borderColor} w="full" maxW="2xl">
                         <Text fontSize="xl" fontWeight="bold" textAlign="center" color="gray.500">
@@ -241,7 +239,7 @@ const NationalParkPage = () => {
                 )}
             </VStack>
 
-            {/* AlertDialog for non-logged-in users */}
+            {/* AlertDialog untuk user yg belum login */}
             <AlertDialog
                 isOpen={isOpen}
                 leastDestructiveRef={cancelRef}

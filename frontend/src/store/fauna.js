@@ -13,8 +13,7 @@ export const useFaunaStore = create((set) => ({
     createFauna: async (faunaData) => {
         set({ loading: true, error: null });
         try {
-            // AXIOS WILL AUTOMATICALLY ATTACH THE AUTHORIZATION HEADER
-            // if a token is set via setAuthToken(token) or loaded via loadAuthToken()
+            // AXIOS akan secara otomatis menaruh header jika token di set via setAuthToken(token) atau loadAuthToken()
             const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/data/fauna`, faunaData);
 
             if (!response.data.success) {
@@ -40,7 +39,7 @@ export const useFaunaStore = create((set) => ({
     deleteFauna: async (id) => {
         set({ loading: true, error: null });
         try {
-            // AXIOS WILL AUTOMATICALLY ATTACH THE AUTHORIZATION HEADER
+             // AXIOS akan secara otomatis menaruh header jika token di set via setAuthToken(token) atau loadAuthToken()
             const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/data/fauna/${id}`);
             if (!response.data.success) {
                 set({ loading: false });
@@ -64,7 +63,7 @@ export const useFaunaStore = create((set) => ({
     updateFauna: async (id, updatedFauna) => {
         set({ loading: true, error: null });
         try {
-            // AXIOS WILL AUTOMATICALLY ATTACH THE AUTHORIZATION HEADER
+          // AXIOS akan secara otomatis menaruh header jika token di set via setAuthToken(token) atau loadAuthToken()
             const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/data/fauna/${id}`, updatedFauna);
             if (!response.data.success) {
                 set({ loading: false });
@@ -90,7 +89,7 @@ export const useFaunaStore = create((set) => ({
         }
     },
 
-    // fetchFauna and fetchFaunaById typically do NOT require a token if they are public read operations.
+
     fetchFauna: async () => {
         set({ loading: true, error: null });
         try {

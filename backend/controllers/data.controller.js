@@ -2,7 +2,7 @@ import Flora from "../models/flora.model.js";
 import Fauna from "../models/fauna.model.js";
 import TamanNasional from "../models/taman_nasional.model.js";
 import mongoose from "mongoose";
-import { deleteFromCloudinary } from "../config/cloudinary.js"; // Tidak perlu lagi import uploadToCloudinary
+import { deleteFromCloudinary } from "../config/cloudinary.js"; 
 
 // Helper untuk memilih model
 const getModel = (collectionName) => {
@@ -42,21 +42,13 @@ export const createData = async (req, res) => {
 
     console.log('Inside createData controller...');
     console.log('req.user:', req.user);
-    console.log('req.user.gmail:', req.user?.gmail); // Menggunakan optional chaining untuk menghindari error jika req.user null/undefined
+    console.log('req.user.gmail:', req.user?.gmail);
   
     // Upload ke Cloudinary jika ada file
     if (req.file) {
         imagePath = req.file.secure_url; // Mengambil secure_url dari Cloudinary
     }
 
-    // Parse kegunaan (jika perlu)
-    if (dataToInsert.kegunaan && typeof dataToInsert.kegunaan === 'string') {
-        try {
-            dataToInsert.kegunaan = JSON.parse(dataToInsert.kegunaan);
-        } catch (e) {
-            return res.status(400).json({ message: "Format 'kegunaan' tidak valid (harus JSON string)" });
-        }
-    }
 
     // Tambahkan image ke data
     if (imagePath) {
@@ -78,8 +70,7 @@ export const createData = async (req, res) => {
 
 
         if (!req.user || !req.user.gmail) {
-        // Ini adalah skenario jika middleware `protect` atau `authorizeRoles` gagal
-        // atau tidak dipasang pada rute ini sebelum `createData` dieksekusi.
+        // Ini skenario kalo middleware `protect` atau `authorizeRoles` gagal
         return res.status(401).json({ message: "Unauthorized: User's gmail not found. Please ensure you are logged in and the authorization middleware is correctly applied." });
     }
 
@@ -125,14 +116,6 @@ export const updateData = async (req, res) => {
             updateData.image = null;
         }
 
-        // Parse kegunaan
-        if (updateData.kegunaan && typeof updateData.kegunaan === 'string') {
-            try {
-                updateData.kegunaan = JSON.parse(updateData.kegunaan);
-            } catch (e) {
-                return res.status(400).json({ message: "Format 'kegunaan' tidak valid." });
-            }
-        }
 
         const updatedDocument = await Model.findByIdAndUpdate(id, updateData, {
             new: true,

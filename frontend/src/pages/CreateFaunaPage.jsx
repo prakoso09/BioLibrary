@@ -12,8 +12,8 @@ import {
   IconButton,
   Text,
   Select,
-  Textarea, // Tambahkan Textarea untuk deskripsi panjang
-  SimpleGrid, // Untuk tata letak yang lebih rapi
+  Textarea, 
+  SimpleGrid, 
 } from '@chakra-ui/react';
 import { useFaunaStore } from '../store/fauna';
 import { useNavigate } from 'react-router-dom';
@@ -443,7 +443,6 @@ const CreateFaunaPage = () => {
             <option value="Omnivora">Omnivora</option>
             <option value="Frugivora">Frugivora</option>
             <option value="Folivora">Folivora</option>
-            {/* Tambahkan opsi lain sesuai kebutuhan */}
           </Select>
           <Input placeholder="Makanan Utama" name="makananUtama" value={newFauna.makananUtama} onChange={handleChange} {...inputStyle} />
           <Input placeholder="Cara Bergerak" name="caraBergerak" value={newFauna.caraBergerak} onChange={handleChange} {...inputStyle} />
@@ -465,7 +464,6 @@ const CreateFaunaPage = () => {
             <option value="Diurnal">Diurnal</option>
             <option value="Nokturnal">Nokturnal</option>
             <option value="Krepuskular">Krepuskular</option>
-            {/* Tambahkan opsi lain sesuai kebutuhan */}
           </Select>
           <Input placeholder="Perilaku Sosial" name="perilaku.sosial" value={newFauna.perilaku.sosial} onChange={handleChange} {...inputStyle} />
           <Input placeholder="Komunikasi" name="perilaku.komunikasi" value={newFauna.perilaku.komunikasi} onChange={handleChange} {...inputStyle} />
@@ -492,7 +490,7 @@ const CreateFaunaPage = () => {
 
           <Textarea placeholder="Deskripsi" name="deskripsi" value={newFauna.deskripsi} onChange={handleChange} {...inputStyle} />
 
-          {/* FILE INPUT IMAGE */}
+          {/* File input image */}
           <Input
             type="file"
             accept="image/*"

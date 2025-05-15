@@ -18,11 +18,11 @@ import {
   ListIcon,
   UnorderedList,
 } from '@chakra-ui/react';
-import { ArrowLeftIcon, EditIcon, DeleteIcon, CheckCircleIcon } from '@chakra-ui/icons'; // Added CheckCircleIcon for lists
+import { ArrowLeftIcon, EditIcon, DeleteIcon, CheckCircleIcon } from '@chakra-ui/icons'; 
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useFloraStore } from '../store/flora';
-import FloraFormModal from '../components/FloraFormModal'; // Pastikan ini sudah diadaptasi untuk model baru
+import FloraFormModal from '../components/FloraFormModal'; 
 import DeleteConfirmationModal from '../components/DeleteConfirmationModal';
 import { getUserRole, isLoggedIn, getUserGmail } from '../utils/auth';
 
@@ -72,7 +72,7 @@ const FloraDetailPage = () => {
   const borderColor = useColorModeValue('whiteAlpha.500', 'whiteAlpha.300');
   const textColor = useColorModeValue('blackAlpha.900', 'whiteAlpha.900');
   const headingColor = useColorModeValue('teal.600', 'cyan.400');
-  const subheadingColor = useColorModeValue('blue.500', 'blue.300'); // Added for consistency
+  const subheadingColor = useColorModeValue('blue.500', 'blue.300'); 
 
   if (loadingSingleFlora || !singleFlora) {
     return (
@@ -108,12 +108,12 @@ const FloraDetailPage = () => {
     return new Date(dateString).toLocaleDateString('id-ID', options);
   };
 
-  // Helper for rendering text value or 'N/A'
+  // Kalau value gaada nilainya isi N/A
   const renderValue = (value) => {
     return value || 'N/A';
   };
 
-  // Mengelompokkan atribut berdasarkan kategori untuk tampilan yang lebih terstruktur
+  // Mengelompokkan atribut berdasarkan kategori 
   const taxonomicAttributes = [
     ['Nama Ilmiah Lengkap', renderValue(singleFlora.namaIlmiahLengkap)],
     ['Nama Lokal Lain', formatArray(singleFlora.namaLokalLain)],
@@ -207,7 +207,7 @@ const FloraDetailPage = () => {
       <MotionContainer
         maxW="container.xl"
         mt={10}
-        mb={10} // Added bottom margin for consistency
+        mb={10} 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -272,7 +272,7 @@ const FloraDetailPage = () => {
                 alt={singleFlora.namaLokal}
                 w="full"
                 objectFit="cover"
-                h={500} // Fixed height for consistency with NationalParkDetailPage
+                h={500} 
               />
             </Box>
 
@@ -299,7 +299,7 @@ const FloraDetailPage = () => {
 
             <Divider borderColor={borderColor} opacity={0.5} />
 
-            {/* Deskripsi Umum Section */}
+            {/* Deskripsi Umum  */}
             {singleFlora.deskripsi && (
               <>
                 <Heading as="h2" size="lg" color={headingColor}>Deskripsi Umum</Heading>
@@ -329,7 +329,7 @@ const FloraDetailPage = () => {
                           {value}
                         </Text>
                       ) : (
-                        value // Render as component (UnorderedList)
+                        value // Render sebagai  component (unorderedList)
                       )}
                     </Box>
                   ))}

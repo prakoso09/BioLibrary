@@ -13,7 +13,7 @@ import {
     Spinner,
     useDisclosure,
     HStack,
-    SimpleGrid, // Added SimpleGrid for better layout
+    SimpleGrid, 
     ListItem,
     ListIcon,
     UnorderedList
@@ -66,13 +66,13 @@ const FaunaDetailPage = () => {
     const handleGoBack = () => navigate('/Fauna');
 
     const bg = useColorModeValue(
-        'linear-gradient(to right, rgba(255,255,255,0.3), rgba(220,255,250,0.2))', // Adjusted for consistency with NationalParkDetailPage
+        'linear-gradient(to right, rgba(255,255,255,0.3), rgba(220,255,250,0.2))', 
         'linear-gradient(to right, rgba(23,25,35,0.7), rgba(12,18,30,0.5))'
     );
     const borderColor = useColorModeValue('whiteAlpha.500', 'whiteAlpha.300');
     const textColor = useColorModeValue('blackAlpha.900', 'whiteAlpha.900');
     const headingColor = useColorModeValue('teal.600', 'cyan.400');
-    const subheadingColor = useColorModeValue('blue.500', 'blue.300'); // Added for consistency
+    const subheadingColor = useColorModeValue('blue.500', 'blue.300'); 
 
     if (loadingSingleFauna || !singleFauna) {
         return (
@@ -95,13 +95,12 @@ const FaunaDetailPage = () => {
     console.log("isCreator:", isCreator);
     console.log("canEditOrDelete (Final Decision):", canEditOrDelete);
     console.log("--- END DEBUG ---");
-
-    // Helper for rendering text value or 'N/A'
+    // kalo gaada vakue maka retrun N/A
     const renderValue = (value) => {
         return value || 'N/A';
     };
 
-    // Helper function to render lists
+    // Helper function buat render lists
     const formatArray = (arr, icon = CheckCircleIcon, iconColor = "green.500") => {
         if (!Array.isArray(arr) || arr.length === 0) return <Text fontSize="md" color={textColor}>N/A</Text>;
         return (
@@ -116,7 +115,7 @@ const FaunaDetailPage = () => {
         );
     };
 
-    // Grouping attributes for structured display
+    // Mengelompokkan attribut 
     const generalInformationAttributes = [
         ['Nama Lokal', renderValue(singleFauna.namaLokal)],
         ['Nama Ilmiah', renderValue(singleFauna.namaIlmiah)],
@@ -140,7 +139,6 @@ const FaunaDetailPage = () => {
         ['Subfamili', renderValue(singleFauna.klasifikasiIlmiah.subfamili)],
         ['Genus', renderValue(singleFauna.klasifikasiIlmiah.genus)],
         ['Spesies', renderValue(singleFauna.klasifikasiIlmiah.spesies)],
-        // Subspesies will be handled separately as it's an array of objects
     ];
 
     const bodySizeAttributes = [
@@ -176,7 +174,6 @@ const FaunaDetailPage = () => {
         ['Alasan', renderValue(singleFauna.statusKepunahan.alasan)],
         ['Manajemen Konflik', renderValue(singleFauna.statusKepunahan.manajemenKonflik)],
         ['Invasi/Introduksi', renderValue(singleFauna.statusKepunahan.invasiIntroduksi)],
-        // Ancaman and Upaya Konservasi will be handled separately as they are arrays
     ];
 
     return (
@@ -251,7 +248,7 @@ const FaunaDetailPage = () => {
                             />
                         </Box>
 
-                        {/* Optional: If fauna data had other images, render them here */}
+                        {/* Optional: kalo fauna ada gambar lain, aktifkan kode dibawah*/}
                         {/* {singleFauna.urlGambarLain && singleFauna.urlGambarLain.length > 0 && (
                             <Box w="full">
                                 <Text fontWeight="bold" fontSize="xl" color={headingColor} mb={3}>
@@ -273,7 +270,7 @@ const FaunaDetailPage = () => {
                             </Box>
                         )} */}
 
-                        {/* Deskripsi Umum Section */}
+                        {/* Deskripsi Umum  */}
                         {singleFauna.deskripsi && (
                             <>
                                 <Heading as="h2" size="lg" color={headingColor}>Deskripsi Umum</Heading>
@@ -286,7 +283,7 @@ const FaunaDetailPage = () => {
                             </>
                         )}
 
-                        {/* General Information Section */}
+                        {/* General Information  */}
                         {generalInformationAttributes.some(([_, value]) => (typeof value === 'string' && value !== 'N/A') || (typeof value !== 'string')) && (
                             <>
                                 <Heading as="h2" size="lg" color={headingColor}>Informasi Umum</Heading>
@@ -301,7 +298,7 @@ const FaunaDetailPage = () => {
                                                     {value}
                                                 </Text>
                                             ) : (
-                                                value // Render as component (UnorderedList for arrays)
+                                                value 
                                             )}
                                         </Box>
                                     ))}
@@ -310,7 +307,7 @@ const FaunaDetailPage = () => {
                             </>
                         )}
 
-                        {/* Scientific Classification Section */}
+                        {/* Scientific Classification */}
                         {taxonomicClassificationAttributes.some(([_, value]) => (typeof value === 'string' && value !== 'N/A') || (typeof value !== 'string')) && (
                             <>
                                 <Heading as="h2" size="lg" color={headingColor}>Klasifikasi Ilmiah</Heading>
@@ -335,9 +332,9 @@ const FaunaDetailPage = () => {
                                         <Text fontWeight="semibold" fontSize="md" color={subheadingColor}>
                                             Subspesies:
                                         </Text>
-                                        <UnorderedList align="start" mt={1} spacing={1}> {/* Changed VStack to UnorderedList */}
+                                        <UnorderedList align="start" mt={1} spacing={1}> 
                                             {singleFauna.klasifikasiIlmiah.subspesies.map((sub, idx) => (
-                                                <ListItem key={idx} fontSize="md" color={textColor}> {/* Changed Text to ListItem */}
+                                                <ListItem key={idx} fontSize="md" color={textColor}>
                                                     <ListIcon as={CheckCircleIcon} color="green.500" />
                                                     {sub.nama} ({sub.deskripsi})
                                                 </ListItem>
@@ -349,7 +346,7 @@ const FaunaDetailPage = () => {
                             </>
                         )}
 
-                        {/* Ukuran Tubuh Section */}
+                        {/* Ukuran Tubuh */}
                         {bodySizeAttributes.some(([_, value]) => (typeof value === 'string' && value !== 'N/A') || (typeof value !== 'string')) && (
                             <>
                                 <Heading as="h2" size="lg" color={headingColor}>Ukuran Tubuh</Heading>
@@ -369,7 +366,7 @@ const FaunaDetailPage = () => {
                             </>
                         )}
 
-                        {/* Reproduksi Section */}
+                        {/* Reproduksi */}
                         {reproductionAttributes.some(([_, value]) => (typeof value === 'string' && value !== 'N/A') || (typeof value !== 'string')) && (
                             <>
                                 <Heading as="h2" size="lg" color={headingColor}>Reproduksi</Heading>
@@ -389,7 +386,7 @@ const FaunaDetailPage = () => {
                             </>
                         )}
 
-                        {/* Perilaku Section */}
+                        {/* Perilaku */}
                         {behaviorAttributes.some(([_, value]) => (typeof value === 'string' && value !== 'N/A') || (typeof value !== 'string')) && (
                             <>
                                 <Heading as="h2" size="lg" color={headingColor}>Perilaku</Heading>
@@ -409,7 +406,7 @@ const FaunaDetailPage = () => {
                             </>
                         )}
 
-                        {/* Status Kepunahan Section */}
+                        {/* Status Kepunahan*/}
                         {extinctionStatusAttributes.some(([_, value]) => (typeof value === 'string' && value !== 'N/A') || (typeof value !== 'string')) ||
                             (singleFauna.statusKepunahan.ancaman && singleFauna.statusKepunahan.ancaman.length > 0) ||
                             (singleFauna.statusKepunahan.upayaKonservasi && singleFauna.statusKepunahan.upayaKonservasi.length > 0) ? (

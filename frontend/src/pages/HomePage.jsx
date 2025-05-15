@@ -15,10 +15,10 @@ import { motion } from 'framer-motion';
 import { FaLeaf, FaPaw, FaMountain, FaCamera } from 'react-icons/fa';
 import { keyframes } from '@emotion/react';
 
-// Impor gambar latar belakang dari direktori components
+// Impor gambar latar belakang 
 import backgroundImage from '../components/bg.jpg';
-// Impor ikon baru yang Anda download
-import myNatureIcon from '../components/my-nature-icon.png'; // Sesuaikan nama file ikon Anda di sini
+// Impor ikon
+import myNatureIcon from '../components/my-nature-icon.png'; 
 
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);

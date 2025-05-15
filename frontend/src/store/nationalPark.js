@@ -1,16 +1,14 @@
-// store/nationalPark.js
 import { create } from "zustand";
 import axios from "axios";
 
-// Pastikan ini sesuai dengan URL backend Anda untuk endpoint Taman Nasional
-// Asumsi endpoint Anda adalah /api/data/taman_nasional
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'; // Pastikan sesuai backend, port = 5000
 
 export const useNationalParkStore = create((set) => ({
     nationalParks: [],
     singleNationalPark: null,
     loadingSingleNationalPark: false,
-    loadingNationalParks: false, // Mengganti 'loading' agar lebih spesifik
+    loadingNationalParks: false, 
     error: null,
 
     setNationalParks: (nationalParks) => set({ nationalParks }),
@@ -18,7 +16,7 @@ export const useNationalParkStore = create((set) => ({
     createNationalPark: async (nationalParkData) => {
         set({ loadingNationalParks: true, error: null });
         try {
-            // AXIOS WILL AUTOMATICALLY ATTACH THE AUTHORIZATION HEADER
+            // AXIOS akan secara otomatis menaruh header jika token di set via setAuthToken(token) atau loadAuthToken()
             const response = await axios.post(`${API_BASE_URL}/api/data/taman_nasional`, nationalParkData);
 
             if (!response.data.success) {
@@ -44,7 +42,7 @@ export const useNationalParkStore = create((set) => ({
     deleteNationalPark: async (id) => {
         set({ loadingNationalParks: true, error: null });
         try {
-            // AXIOS WILL AUTOMATICALLY ATTACH THE AUTHORIZATION HEADER
+            // AXIOS akan secara otomatis menaruh header jika token di set via setAuthToken(token) atau loadAuthToken()
             const response = await axios.delete(`${API_BASE_URL}/api/data/taman_nasional/${id}`);
             if (!response.data.success) {
                 set({ loadingNationalParks: false });
@@ -66,9 +64,9 @@ export const useNationalParkStore = create((set) => ({
     },
 
     updateNationalPark: async (id, updatedNationalPark) => {
-        set({ loadingNationalParks: true, error: null }); // Menggunakan loadingNationalParks untuk update
+        set({ loadingNationalParks: true, error: null });
         try {
-            // AXIOS WILL AUTOMATICALLY ATTACH THE AUTHORIZATION HEADER
+            // AXIOS akan secara otomatis menaruh header jika token di set via setAuthToken(token) atau loadAuthToken()
             const response = await axios.put(`${API_BASE_URL}/api/data/taman_nasional/${id}`, updatedNationalPark);
             if (!response.data.success) {
                 set({ loadingNationalParks: false });
