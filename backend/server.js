@@ -22,10 +22,10 @@ export default cloudinary;
 // Dapatkan __filename dan __dirname yang akurat untuk ES Modules, dirname tuh direktori?
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename); 
-
+const FRONTEND_URL = process.env.FRONTEND_URL 
 // Konfigurasi CORS
 app.use(cors({
-    origin: 'http://localhost:5173', 
+    origin: FRONTEND_URL, 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));

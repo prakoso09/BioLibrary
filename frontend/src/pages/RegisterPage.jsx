@@ -43,12 +43,12 @@ const Register = () => {
   const toast = useToast();
   const navigate = useNavigate();
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ;
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       // Mengirimkan permintaan register ke backend 
-      const response = await axios.post("http://localhost:5000/api/data/register", form);
+      const response = await axios.post(API_BASE_URL + "/api/data/register", form);
       
       toast({
         title: "Registrasi Berhasil!",

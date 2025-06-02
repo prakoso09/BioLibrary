@@ -34,11 +34,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/data/login", form);
+      const response = await axios.post(API_BASE_URL + "/api/data/login", form);
       
 
       setAuthToken(response.data.token); 
