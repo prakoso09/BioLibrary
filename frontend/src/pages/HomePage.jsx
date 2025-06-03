@@ -43,7 +43,7 @@ const HomePage = () => {
   const features = [
     { label: 'Jelajahi Flora', icon: FaLeaf, link: '/Flora' },
     { label: 'Jelajahi Fauna', icon: FaPaw, link: '/Fauna' },
-    { label: 'Jelajahi Taman Nasional', icon: FaMountain, link: '/Park' },
+    { label: 'Jelajahi Taman Nasional', icon: FaMountain, link: '/NationalPark' },
     { label: 'Scan Spesies', icon: FaCamera, link: '/Scan' },
   ];
 
