@@ -500,7 +500,7 @@ const NationalParkDetailPage = () => {
                         onConfirm={async () => {
                             await deleteNationalPark(singleNationalPark._id);
                             onDeleteClose();
-                            navigate('/national-parks'); // Kembali ke daftar setelah penghapusan
+                            navigate('/NationalPark'); // Kembali ke daftar setelah penghapusan
                         }}
                         title="Delete National Park"
                         body={`Are you sure you want to delete "${singleNationalPark.namaResmi}"? This action cannot be undone.`}
